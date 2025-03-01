@@ -1,0 +1,17 @@
+#ifndef __KEY_H_
+#define __KEY_H_
+
+#include "stdint.h"
+
+
+typedef enum
+{
+	KEY_INVALID = -1,
+	KEY_0,
+	KEY_1,
+} KeyNum;
+
+void KeyTickProcess();
+int8_t GetKeyNum();
+
+#endif

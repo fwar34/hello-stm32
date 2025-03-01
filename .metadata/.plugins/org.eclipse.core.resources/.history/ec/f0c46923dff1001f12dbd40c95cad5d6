@@ -1,0 +1,26 @@
+#include "key.h"
+#include "stdint.h"
+#include "stm32f1xx_hal.h"
+
+typedef enum
+{
+	KEY_INVALID = -1,
+	KEY_0,
+	KEY_1,
+}KeyNum;
+
+static KeyNum keyNum = 0;
+uint8_t GetKeyNum()
+{
+	return keyNum;
+}
+
+void KeyTick()
+{
+	static uint8_t keyCurState = 0;
+	GPIO_PinState keyPrevState = keyCurState;
+	keyCurState = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+	if (keyPrevState == GPIO_PIN_SET && keyCurState == GPIO_PIN_RESET) {
+		keyNum = KEY_0;
+	}
+}

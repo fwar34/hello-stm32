@@ -1,0 +1,8 @@
+#include "key.h"
+#include "stdint.h"
+
+void KeyTick()
+{
+	static uint8_t keyCurState = 0;
+
+}

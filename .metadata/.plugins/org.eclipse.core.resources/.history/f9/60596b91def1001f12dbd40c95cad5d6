@@ -1,0 +1,9 @@
+#include "key.h"
+#include "stdint.h"
+#include "stm32f1xx_hal.h"
+
+void KeyTick()
+{
+	static uint8_t keyCurState = 0;
+	keyCurState = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
+}

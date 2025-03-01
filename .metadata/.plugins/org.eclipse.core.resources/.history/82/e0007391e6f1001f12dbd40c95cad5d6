@@ -1,0 +1,15 @@
+#ifndef __KEY_STATE_MACHINE_H_
+#define __KEY_STATE_MACHINE_H_
+
+#include "stdint.h"
+
+typedef enum
+{
+	KEY_INVALID = -1,
+	KEY_0,
+	KEY_1,
+} KeyNum;
+
+
+
+#endif

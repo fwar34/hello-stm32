@@ -1,0 +1,10 @@
+22:49:05 **** Incremental Build of configuration Debug for project ec11-freeRTOS ****
+make -j8 all 
+arm-none-eabi-size  ec11-freeRTOS.elf 
+   text	   data	    bss	    dec	    hex	filename
+  21068	     16	   8200	  29284	   7264	ec11-freeRTOS.elf
+Finished building: default.size.stdout
+ 
+
+22:49:06 Build Finished. 0 errors, 0 warnings. (took 654ms)
+

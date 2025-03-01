@@ -1,0 +1,6 @@
+#include "key_state_machine.h"
+
+int8_t GetKeyNum()
+{
+	return 0;
+}

@@ -1,0 +1,25 @@
+22:50:45 **** Incremental Build of configuration Debug for project hello ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/key.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/key.d" -MT"Core/Src/key.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/key.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'Ec11KeyProcess':
+../Core/Src/main.c:142:25: warning: unused variable 'lastKeyTickCount' [-Wunused-variable]
+  142 |         static uint32_t lastKeyTickCount = 0;
+      |                         ^~~~~~~~~~~~~~~~
+../Core/Src/main.c:144:1: warning: control reaches end of non-void function [-Wreturn-type]
+  144 | }
+      | ^
+arm-none-eabi-gcc -o "hello.elf" @"objects.list"   -mcpu=cortex-m3 -T"E:\STM32CubeIDE_Workspace\hello\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: hello.elf
+ 
+arm-none-eabi-size  hello.elf 
+arm-none-eabi-objdump -h -S hello.elf  > "hello.list"
+   text	   data	    bss	    dec	    hex	filename
+  13984	    100	   2276	  16360	   3fe8	hello.elf
+Finished building: default.size.stdout
+ 
+Finished building: hello.list
+ 
+
+22:50:46 Build Finished. 0 errors, 2 warnings. (took 1s.486ms)
+

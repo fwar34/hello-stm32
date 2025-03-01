@@ -1,0 +1,13 @@
+../Core/Src/main.c:108:10:ReadKeyInfo	2
+../Core/Src/main.c:119:6:WriteKeyInfo	4
+../Core/Src/main.c:133:6:Ec11EncoderInit	1
+../Core/Src/main.c:141:5:Ec11KeyProcess	1
+../Core/Src/main.c:146:13:Ec11TickProcess	18
+../Core/Src/main.c:209:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:221:6:ProcessKey	1
+../Core/Src/main.c:234:5:main	2
+../Core/Src/main.c:287:6:SystemClock_Config	3
+../Core/Src/main.c:324:13:MX_TIM4_Init	4
+../Core/Src/main.c:366:13:MX_USART2_UART_Init	2
+../Core/Src/main.c:397:13:MX_GPIO_Init	1
+../Core/Src/main.c:441:6:Error_Handler	1
