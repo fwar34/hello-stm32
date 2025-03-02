@@ -1,5 +1,14 @@
-2025-03-01 14:17:28,662 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 14:17:28.655 ERROR Chromium process exit code: -2,147,483,645
-2025-03-01 14:17:28,671 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 
-2025-03-01 14:17:28,680 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 14:17:28.675 ERROR Crash dump dir: C:\Users\fwar3\AppData\Local\JxBrowser\7.39.2\CrashReports
-2025-03-01 14:17:28,681 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 
-2025-03-01 14:17:28,688 [ERROR] WebApp:398 - JxBrowser engine crashed! Exit code: -2147483645
+2025-03-02 08:35:08,333 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-02 08:56:27,561 [ERROR] AdobePublisher:162 - Exception while opening the connection: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2025-03-02 08:56:27,961 [ERROR] AdobePublisher:162 - Exception while opening the connection: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2025-03-02 08:56:28,307 [ERROR] AdobePublisher:162 - Exception while opening the connection: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2025-03-02 08:56:28,771 [ERROR] AdobePublisher:162 - Exception while opening the connection: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2025-03-02 11:33:03,457 [ERROR] AdobePublisher:162 - Exception while opening the connection: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2025-03-02 21:56:31,681 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-02 21:56:35,217 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-02 22:15:39,205 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2025-03-02 22:15:41,365 [ERROR] ConfigurationRetriever:142 - IOException on connection: Received fatal alert: internal_error
+2025-03-02 22:15:43,535 [ERROR] ConfigurationRetriever:142 - IOException on connection: Received fatal alert: internal_error
+2025-03-02 22:18:22,508 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-02 22:18:24,510 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-02 22:56:40,649 [ERROR] AdobePublisher:162 - Exception while opening the connection: java.net.SocketTimeoutException: Read timed out

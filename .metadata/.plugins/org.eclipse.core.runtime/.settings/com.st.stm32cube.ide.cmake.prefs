@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+hello_stm32_cmake\:Debug/build=Debug
+hello_stm32_cmake\:Debug/cmake_build_type=Debug
+hello_stm32_cmake\:Debug/cmake_export_compile_commands=
+hello_stm32_cmake\:Debug/cmake_toolchain_file=cubeide-gcc.cmake
+hello_stm32_cmake\:Debug/generator=Unix Makefiles
+hello_stm32_cmake\:Debug/misc_command=
+hello_stm32_cmake\:Debug/src=.

@@ -24,6 +24,8 @@
 #include "string.h"
 #include "stdio.h"
 #include "key.h"
+#include "stdbool.h"
+#include "spinlock.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -33,11 +35,13 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define LockBufForever() LockBuf(0)
 #define KEY_BUF_SIZE 4
-#define KEY_LONG_CLICK_TIME_MS 500
-#define KEY_DOUBLE_TIME_MS 200
-#define KEY_DEBOUNCING_TIME_MS 10
-#define KEY_HOLD_TIME_MS 100
+#define KEY_DEBOUNCING_TIME_10MS 10
+#define KEY_CLICK_TIME_200MS 200
+#define KEY_HOLD_TIME_300MS 300
+#define KEY_DOUBLE_TIME_500MS 500
+#define KEY_LONG_CLICK_TIME_700MS 700
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -65,26 +69,35 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-static int32_t encoderCounter = 0;
+static int32_t encodeCounter = 0;
 
 // 按键子状态
 typedef enum
 {
-	KEY_STEP_PRESS, // 按下
+	KEY_STEP_PRESS, // 刚按下电平改变
+	KEY_STEP_PRESS_DEBOUNCING, // 按下去抖
+	KEY_STEP_RELEASE_DEBOUNCING, // 释放去抖
+	KEY_STEP_HOLD, // 抖动过后电平稳定
 	KEY_STEP_RELEASE, // 释放
-//	KEY_STEP_HOLD, // 按住
-	KEY_STEP_DEBOUNCING, // 去抖
 } KeyStep;
 
 // 按键主状态
 typedef enum {
-	EC11_KEY_ROTATE, // 旋转一下
+	EC11_KEY_INVALID,
 	EC11_KEY_CLICK,	 // 单击
-	EC11_KEY_HOLD_ROTATE, // 按住旋转一下
 	EC11_KEY_DOUBLE_CLICK, // 双击
 	EC11_KEY_HOLD, // 按住
 	EC11_KEY_LONG_CLICK, // 长按
+	EC11_KEY_LEFT_ROTATE, // 向左旋转一下
+	EC11_KEY_RIGHT_ROTATE, // 向右旋转一下
+	EC11_KEY_HOLD_LEFT_ROTATE, // 按住向左旋转一下
+	EC11_KEY_HOLD_RIGHT_ROTATE, // 按住向右旋转一下
 } Ec11KeyState;
+
+const char* keyEvent[] = {
+	"",
+	"click", "double_click", "hold", "long_click", "left_rotate", "right_rotate", "hold_left_rotate", "hold_right_rotate"
+};
 
 typedef void (*ItemCallback)();
 
@@ -96,32 +109,41 @@ typedef struct
 	ItemCallback callback;
 } Ec11KeyStateMachineItem;
 
-void JudgeClick();
-void JudgeDoubleClick();
+void ProcessClickPress();
+void ProcessClickPressDebouncing();
+void ProcessClickReleaseDebouncing();
+void ProcessClickRelease();
 
+void ProcessDoubleClickPress();
+void ProcessDoubleClickDebouncing();
+void ProcessDoubleClickHold();
+void ProcessDoubleClickRelease();
+
+void ProcessLongClickFirst();
+void ProcessLongClickDebouncing();
+void ProcessLongClickHold();
+void ProcessLongClickRelease();
 
 static Ec11KeyStateMachineItem ec11StateMachineTable[] = {
-	{EC11_KEY_CLICK, KEY_STEP_RELEASE, EC11_KEY_CLICK, JudgeClick},
-	{EC11_KEY_CLICK, KEY_STEP_DEBOUNCING, EC11_KEY_CLICK, JudgeClick},
-	{EC11_KEY_CLICK, KEY_STEP_PRESS, EC11_KEY_CLICK, JudgeClickRotate},
-	{EC11_KEY_CLICK, KEY_STEP_RELEASE, EC11_KEY_DOUBLE_CLICK, JudgeClick},
+	{EC11_KEY_CLICK, KEY_STEP_PRESS, EC11_KEY_CLICK, ProcessClickPress},
+	{EC11_KEY_CLICK, KEY_STEP_PRESS_DEBOUNCING, EC11_KEY_CLICK, ProcessClickPressDebouncing},
+	{EC11_KEY_CLICK, KEY_STEP_RELEASE_DEBOUNCING, EC11_KEY_CLICK, ProcessClickReleaseDebouncing},
+	{EC11_KEY_CLICK, KEY_STEP_RELEASE, EC11_KEY_DOUBLE_CLICK, ProcessClickRelease},
 
-	{EC11_KEY_DOUBLE_CLICK, KEY_STEP_RELEASE, EC11_KEY_DOUBLE_CLICK, JudgeDoubleClick},
-	{EC11_KEY_DOUBLE_CLICK, KEY_STEP_DEBOUNCING, EC11_KEY_DOUBLE_CLICK, JudgeDoubleClick},
-	{EC11_KEY_DOUBLE_CLICK, KEY_STEP_PRESS, EC11_KEY_DOUBLE_CLICK, JudgeDoubleClickRotate},
-	{EC11_KEY_DOUBLE_CLICK, KEY_STEP_RELEASE, EC11_KEY_LONG_CLICK, JudgeDoubleClick},
-
-	{EC11_KEY_LONG_CLICK, KEY_STEP_RELEASE, EC11_KEY_DOUBLE_CLICK, JudgeDoubleClick},
-	{EC11_KEY_LONG_CLICK, KEY_STEP_DEBOUNCING, EC11_KEY_DOUBLE_CLICK, JudgeDoubleClick},
-	{EC11_KEY_LONG_CLICK, KEY_STEP_PRESS, EC11_KEY_DOUBLE_CLICK, JudgeDoubleClickRotate},
-	{EC11_KEY_LONG_CLICK, KEY_STEP_RELEASE, EC11_KEY_LONG_CLICK, JudgeDoubleClick},
+	{EC11_KEY_DOUBLE_CLICK, KEY_STEP_PRESS, EC11_KEY_DOUBLE_CLICK, ProcessDoubleClickPress},
+//	{EC11_KEY_DOUBLE_CLICK, KEY_STEP_DEBOUNCING, EC11_KEY_DOUBLE_CLICK, ProcessDoubleClickDebouncing},
+//	{EC11_KEY_DOUBLE_CLICK, KEY_STEP_HOLD, EC11_KEY_DOUBLE_CLICK, ProcessDoubleClickHold},
+//	{EC11_KEY_DOUBLE_CLICK, KEY_STEP_RELEASE, EC11_KEY_LONG_CLICK, ProcessDoubleClickEnd},
+//
+//	{EC11_KEY_LONG_CLICK, KEY_STEP_FIRST, EC11_KEY_DOUBLE_CLICK, ProcessLongClickFirst},
+//	{EC11_KEY_LONG_CLICK, KEY_STEP_DEBOUNCING, EC11_KEY_DOUBLE_CLICK, ProcessLongClickDebouncing},
+//	{EC11_KEY_LONG_CLICK, KEY_STEP_HOLD, EC11_KEY_DOUBLE_CLICK, ProcessLongClickHold},
+//	{EC11_KEY_LONG_CLICK, KEY_STEP_RELEASE, EC11_KEY_LONG_CLICK, ProcessLongClickEnd},
 };
-
-static Ec11KeyStateMachineItem ec11StateMachine;
 
 typedef struct {
 	uint8_t keyState;
-	uint8_t isValid;
+	uint32_t encodeCounter;
 } KeyInfo;
 
 typedef enum {
@@ -142,71 +164,61 @@ typedef struct {
 	uint8_t readIndex;
 	uint8_t writeIndex;
 	uint8_t count;
-	volatile uint8_t bufLock;
+	volatile SpinLock bufLock;
 } Ec11KeyCircleBuf;
 
 typedef struct {
 	Ec11KeyCircleBuf keyCircleBuf;
+	Ec11KeyStateMachineItem ec11StateMachine;
+	GPIO_PinState lastKeyLevel;
+	uint32_t lastPressTick; // 长按判断
+	uint32_t debouncingTick; // 去抖
+	uint32_t lastClickTick; // 识别到单击的tick，判断双击用
+	bool hasRotate; // ec11是否旋转
 } Ec11Encoder;
 
 static Ec11Encoder ec11Encoder;
 
-int32_t LockBuf(uint32_t ms = 0)
-{
-	uint32_t currentTick = HAL_GetTick();
-	while (cbuf->bufLock) {
-		if (ms && HAL_GetTick() - currentTick >= ms * 1000) {
-			return BUF_LOCK_ERROR_TIMEOUT;
-		}
-	}
-	cbuf->bufLock = 1;
-	return BUF_LOCK_ERROR_OK;
-}
-
-void ReleaseBuf()
-{
-	cbuf->bufLock = 0;
-}
-
-bool ReadKeyInfo(KeyInfo *out)
+bool ReadKeyInfo(KeyInfo *out, uint8_t *count)
 {
 	bool ret = false;
-	LockBuf();
+	Ec11KeyCircleBuf *cbuf = &ec11Encoder.keyCircleBuf;
+	accquire_spinlock(&cbuf->bufLock, 0);
 	do {
-		Ec11KeyCircleBuf *cbuf = &ec11Encoder.keyCircleBuf;
 		if (cbuf->count > 0) {
-			cbuf->readIndex = (cbuf->readIndex + 1) % KEY_BUF_SIZE;
-			cbuf->count--;
 			*out = cbuf->keyInfoBuf[cbuf->readIndex];
+			cbuf->count--;
+			*count = cbuf->count;
+			cbuf->readIndex = (cbuf->readIndex + 1) % KEY_BUF_SIZE;
 			ret = true;
 			break;
 		}
 	} while (0);
-	ReleaseBuf();
+	release_spinlock(&cbuf->bufLock);
 	return ret;
 }
 
 bool PeekKeyInfo(KeyInfo *out)
 {
 	bool ret = false;
-	LockBuf();
+	Ec11KeyCircleBuf *cbuf = &ec11Encoder.keyCircleBuf;
+	accquire_spinlock(&cbuf->bufLock, 0);
 	do {
-		Ec11KeyCircleBuf *cbuf = &ec11Encoder.keyCircleBuf;
 		if (cbuf->count > 0) {
-			*out = &cbuf->keyInfoBuf[cbuf->readIndex];
+			*out = cbuf->keyInfoBuf[cbuf->readIndex];
 			ret = true;
 			break;
 		}
 	} while (0);
-	ReleaseBuf();
+	release_spinlock(&cbuf->bufLock);
 	return ret;
 }
 
 void WriteKeyInfo(const KeyInfo *keyInfo)
 {
-	LockBuf();
 	Ec11KeyCircleBuf *cbuf = &ec11Encoder.keyCircleBuf;
-	if (cbuf->count == KEY_BUF_SIZE && cbuf->writeIndex == cbuf->readIndex) { // circlebuf满的时候写数据的时候需要更新读索引
+	accquire_spinlock(&cbuf->bufLock, 0);
+	if (cbuf->count >= KEY_BUF_SIZE && cbuf->writeIndex == cbuf->readIndex) { // circlebuf满的时候写数据的时候需要更新读索引
 		cbuf->readIndex = (cbuf->readIndex + 1) % KEY_BUF_SIZE;
 	}
 	cbuf->keyInfoBuf[cbuf->writeIndex] = *keyInfo;
@@ -215,44 +227,103 @@ void WriteKeyInfo(const KeyInfo *keyInfo)
 	if (cbuf->count > KEY_BUF_SIZE) {
 		cbuf->count = KEY_BUF_SIZE;
 	}
-	ReleaseBuf();
+	release_spinlock(&cbuf->bufLock);
+}
+
+void Ec11ResetStateMachineAnd()
+{
+	ec11Encoder.ec11StateMachine.currentState = EC11_KEY_CLICK;
+	ec11Encoder.ec11StateMachine.currentStep = KEY_STEP_PRESS;
+	ec11Encoder.ec11StateMachine.nextState = EC11_KEY_CLICK;
+	ec11Encoder.lastKeyLevel = GPIO_PIN_SET;
+	ec11Encoder.lastPressTick = 0;
+	ec11Encoder.debouncingTick = 0;
+	ec11Encoder.lastClickTick = 0;
+	ec11Encoder.hasRotate = false;
 }
 
 void Ec11EncoderInit() {
 	ec11Encoder.keyCircleBuf.readIndex = 0;
 	ec11Encoder.keyCircleBuf.writeIndex = 0;
 	ec11Encoder.keyCircleBuf.count = 0;
-	memset(ec11Encoder.keyCircleBuf.keyInfoBuf, 0,
-			sizeof(KeyInfo) * KEY_BUF_SIZE);
+	ec11Encoder.keyCircleBuf.bufLock = 0;
+	memset(ec11Encoder.keyCircleBuf.keyInfoBuf, 0, sizeof(KeyInfo) * KEY_BUF_SIZE);
+
+	Ec11ResetStateMachineAnd();
 }
 
-int Ec11KeyProcess() {
-	static uint32_t lastKeyTickCount = 0;
-	static GPIO_PinState lastKeyLevel = GPIO_PIN_SET;
-	static Ec11KeyState currentEc11KeyState = EC11_KEY_INVALID;
-	if (HAL_GPIO_ReadPin(ec11_Key_GPIO_Port, ec11_Key_Pin) != lastKeyLevel) {
-		lastKeyTickCount = HAL_GetTick();
-	}
-
+void ProcessClickPress()
+{
 	GPIO_PinState currentKeyLevel = HAL_GPIO_ReadPin(ec11_Key_GPIO_Port, ec11_Key_Pin);
+	if (currentKeyLevel == GPIO_PIN_RESET/* && currentKeyLevel != ec11Encoder.lastKeyLevel*/) {
+		ec11Encoder.ec11StateMachine.currentStep = KEY_STEP_PRESS_DEBOUNCING;
+		ec11Encoder.debouncingTick = HAL_GetTick();
+//		ec11Encoder.lastKeyLevel = currentKeyLevel;
+	}
+}
 
-	switch (currentEc11KeyState) {
-	case EC11_KEY_NOTPRESS:
-		if (currentKeyLevel != lastKeyLevel) {
-			if (lastKeyLevel == GPIO_PIN_SET && HAL_GetTick() - lastKeyTickCount > KEY_VIBRATION_ELIMINATE_MS) { // 识别为按下
-				currentEc11KeyState = EC11_KEY_PRESS;
-				lastKeyLevel = currentKeyLevel;
-			}
+void ProcessClickPressDebouncing()
+{
+	uint32_t currTick = HAL_GetTick();
+	GPIO_PinState currentKeyLevel = HAL_GPIO_ReadPin(ec11_Key_GPIO_Port, ec11_Key_Pin);
+	if (currentKeyLevel == GPIO_PIN_RESET) {
+		if (currTick - ec11Encoder.debouncingTick > KEY_DEBOUNCING_TIME_10MS) {
+			ec11Encoder.ec11StateMachine.currentStep = KEY_STEP_RELEASE_DEBOUNCING;
+			ec11Encoder.lastPressTick = currTick; // 保存识别按下的tick
+			ec11Encoder.debouncingTick = 0; // 重置去抖tick，为释放去抖准备
 		}
-		break;
-	case EC11_KEY_PRESS:
-		if (lastKeyLevel == HAL_GPIO_ReadPin(ec11_Key_GPIO_Port, ec11_Key_Pin)) {
+	}
+}
 
-		} else {
-
+void ProcessClickReleaseDebouncing()
+{
+	if (HAL_GPIO_ReadPin(ec11_Key_GPIO_Port, ec11_Key_Pin) == GPIO_PIN_SET) {
+		if (ec11Encoder.debouncingTick == 0) {
+			ec11Encoder.debouncingTick = HAL_GetTick();
 		}
-		break;
-	default:
+
+		if (HAL_GetTick() - ec11Encoder.debouncingTick > KEY_DEBOUNCING_TIME_10MS) {
+			ec11Encoder.ec11StateMachine.currentStep = KEY_STEP_RELEASE;
+			ec11Encoder.ec11StateMachine.nextState = EC11_KEY_DOUBLE_CLICK;
+			ec11Encoder.debouncingTick = 0;
+		}
+	}
+}
+
+void ProcessClickRelease()
+{
+	if (ec11Encoder.hasRotate) { // 旋转后放开
+		Ec11ResetStateMachineAnd();
+	} else {
+		KeyInfo keyInfo = { EC11_KEY_INVALID, 0 };
+		uint32_t resetLevelTick = HAL_GetTick() - ec11Encoder.lastPressTick;
+		if (resetLevelTick < KEY_HOLD_TIME_300MS) { // 单击
+			ec11Encoder.lastClickTick = HAL_GetTick(); // 更新单击tick，判断双击的时候使用
+			keyInfo.keyState = EC11_KEY_CLICK;
+		} else if (resetLevelTick >= KEY_HOLD_TIME_300MS && resetLevelTick <= KEY_LONG_CLICK_TIME_700MS) { // Hold
+			keyInfo.keyState = EC11_KEY_HOLD;
+		} else if (resetLevelTick > KEY_LONG_CLICK_TIME_700MS) { // 长按
+			keyInfo.keyState = EC11_KEY_LONG_CLICK;
+		}
+		WriteKeyInfo(&keyInfo);
+
+		ec11Encoder.ec11StateMachine.currentState = EC11_KEY_DOUBLE_CLICK;
+		ec11Encoder.ec11StateMachine.currentStep = KEY_STEP_PRESS;
+		ec11Encoder.ec11StateMachine.nextState = EC11_KEY_DOUBLE_CLICK;
+		ec11Encoder.lastPressTick = 0;
+	}
+}
+
+void ProcessDoubleClickPress()
+{
+	uint32_t currTick = HAL_GetTick();
+	GPIO_PinState currKeyLevel = HAL_GPIO_ReadPin(ec11_Key_GPIO_Port, ec11_Key_Pin);
+
+	if (currKeyLevel == GPIO_PIN_SET && currTick - ec11Encoder.lastClickTick > KEY_DOUBLE_TIME_500MS) {
+		ec11Encoder.ec11StateMachine.currentState = EC11_KEY_CLICK;
+		ec11Encoder.ec11StateMachine.currentStep = KEY_STEP_PRESS;
+		ec11Encoder.ec11StateMachine.nextState = EC11_KEY_CLICK;
+		ec11Encoder.lastClickTick = 0;
 	}
 }
 
@@ -281,21 +352,35 @@ static void Ec11TickProcess() {
 				if (switchBCounter == 2) {
 					ec11CurrentState = EC11_DIRECTION_INVALID;
 				} else if (switchBCounter == 1) {
-					encoderCounter++;
-					sprintf(message, "--encoderCount = %ld\n", encoderCounter);
-					HAL_UART_Transmit_IT(&huart2, (uint8_t*) message,
-							strlen(message));
+					encodeCounter--;
+					sprintf(message, "--encoderCount = %ld\n", encodeCounter);
+//					HAL_UART_Transmit_IT(&huart2, (uint8_t*) message,
+//							strlen(message));
 					HAL_GPIO_TogglePin(Led0_GPIO_Port, Led0_Pin);
+
+					ec11Encoder.hasRotate = true;
+					KeyInfo keyInfo = { EC11_KEY_LEFT_ROTATE, encodeCounter };
+					if (ec11Encoder.ec11StateMachine.currentStep == KEY_STEP_RELEASE_DEBOUNCING) {
+						keyInfo.keyState = EC11_KEY_HOLD_LEFT_ROTATE;
+					}
+					WriteKeyInfo(&keyInfo);
 				}
 			} else if (ec11CurrentState == EC11_DIRECTION_REVERSE_HALF) {
 				if (switchBCounter == 1) {
 					ec11CurrentState = EC11_DIRECTION_INVALID;
 				} else if (switchBCounter == 2) {
-					encoderCounter--;
-					sprintf(message, "++encoderCount = %ld\n", encoderCounter);
-					HAL_UART_Transmit_IT(&huart2, (uint8_t*) message,
-							strlen(message));
+					encodeCounter++;
+					sprintf(message, "++encoderCount = %ld\n", encodeCounter);
+//					HAL_UART_Transmit_IT(&huart2, (uint8_t*) message,
+//							strlen(message));
 					HAL_GPIO_TogglePin(Led0_GPIO_Port, Led0_Pin);
+
+					ec11Encoder.hasRotate = true;
+					KeyInfo keyInfo = { EC11_KEY_RIGHT_ROTATE, encodeCounter };
+					if (ec11Encoder.ec11StateMachine.currentStep == KEY_STEP_RELEASE_DEBOUNCING) {
+						keyInfo.keyState = EC11_KEY_HOLD_RIGHT_ROTATE;
+					}
+					WriteKeyInfo(&keyInfo);
 				}
 			}
 		}
@@ -319,26 +404,45 @@ static void Ec11TickProcess() {
 	}
 }
 
+void Ec11StateMachineProcess()
+{
+	for (int i = 0; i < sizeof(ec11StateMachineTable) / sizeof(ec11StateMachineTable[0]); ++i) {
+		if (ec11StateMachineTable[i].currentState == ec11Encoder.ec11StateMachine.currentState &&
+			ec11StateMachineTable[i].currentStep == ec11Encoder.ec11StateMachine.currentStep &&
+			ec11StateMachineTable[i].nextState == ec11Encoder.ec11StateMachine.nextState) {
+			ec11StateMachineTable[i].callback();
+		}
+	}
+
+	Ec11TickProcess();
+}
+
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	static uint32_t tickCounter = 0;
 	tickCounter++;
-	Ec11TickProcess();
-	if (tickCounter % 10 == 0) {
-		KeyTickProcess();
-	}
-//	static char message[30];
-//	sprintf(message, "system tick count = %ld\n", HAL_GetTick());
-//	HAL_UART_Transmit_IT(&huart2, (uint8_t*)message, strlen(message));
+	Ec11StateMachineProcess();
 }
 
 void ProcessKey()
 {
+	static uint32_t lastTick = 0;
+	uint32_t currentTick = HAL_GetTick();
+	if (currentTick - lastTick < 1) {
+		return;
+	}
+
+	lastTick = currentTick;
 	KeyInfo keyInfo;
-	if (ReadKeyInfo(&keyInfo)) {
-		static char message[30];
-		sprintf(message, "read keyState(%d) isvaild(%d) sysTickCount(%ld)\n",
-				keyInfo->keyState, keyInfo->isValid, HAL_GetTick());
-		HAL_UART_Transmit_IT(&huart2, message, strlen(message));
+	uint8_t count = 0;
+	if (ReadKeyInfo(&keyInfo, &count)) {
+		static char message[100];
+		sprintf(message, "read keyState(%s,%d) encodeCounter(%ld) remain count(%d) currentTick(%ld) lastTick(%ld)\n",
+				keyEvent[keyInfo.keyState], keyInfo.keyState, keyInfo.encodeCounter, count, currentTick, lastTick);
+		HAL_UART_Transmit_IT(&huart2, (uint8_t*)message, strlen(message));
+
+		if (keyInfo.keyState == EC11_KEY_CLICK) {
+			HAL_GPIO_TogglePin(Led0_GPIO_Port, Led0_Pin);
+		}
 	}
 }
 /* USER CODE END 0 */
@@ -375,6 +479,7 @@ int main(void) {
 	MX_USART2_UART_Init();
 	/* USER CODE BEGIN 2 */
 	HAL_TIM_Base_Start_IT(&htim4);
+	Ec11EncoderInit();
 	/* USER CODE END 2 */
 
 	/* Infinite loop */

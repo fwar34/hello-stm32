@@ -1257,3 +1257,135 @@ Binding(F4,
 
 !ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-02-28 22:50:56.020
 !MESSAGE Existing sessions are:
+
+!ENTRY org.eclipse.cdt.ui 4 0 2025-03-01 20:58:47.569
+!MESSAGE Error in CDT UI during reconcile
+!STACK 1
+C Model Exception: C Model Status [Element main.c does not exist.]
+	at org.eclipse.cdt.internal.core.model.CElement.newNotPresentException(CElement.java:485)
+	at org.eclipse.cdt.internal.core.model.TranslationUnit.makeConsistent(TranslationUnit.java:583)
+	at org.eclipse.cdt.internal.core.model.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:65)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:346)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:613)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(CModelOperation.java:641)
+	at org.eclipse.cdt.internal.core.model.WorkingCopy.reconcile(WorkingCopy.java:365)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:79)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+!SUBENTRY 1 org.eclipse.cdt.core 4 969 2025-03-01 20:58:47.570
+!MESSAGE Element main.c does not exist.
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-01 22:58:22.086
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 53 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-01 22:58:22.086
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-01 22:58:22.089
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 53 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-01 22:58:22.090
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-01 23:04:22.302
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 56 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-01 23:04:22.303
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-01 23:04:22.306
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 56 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-01 23:04:22.306
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 08:24:10.676
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 59 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 08:24:10.677
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 08:24:10.681
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 59 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 08:24:10.682
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 08:53:22.727
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 69 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 08:53:22.728
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 08:53:22.732
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 69 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 08:53:22.733
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 11:33:50.089
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 70 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 11:33:50.090
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 11:33:50.095
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 70 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 11:33:50.095
+!MESSAGE Existing sessions are:
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-03-02 11:43:22.535
+!MESSAGE Indexed 'hello_stm32_cmake' (0 sources, 0 headers) in 0 sec: 0 declarations; 0 references; 0 unresolved inclusions; 0 syntax errors; 0 unresolved names (0%)
+
+!ENTRY org.eclipse.cdt.core 1 0 2025-03-02 11:43:22.761
+!MESSAGE Indexed 'hello_stm32_cmake' (3 sources, 0 headers) in 0.01 sec: 67 declarations; 59 references; 11 unresolved inclusions; 0 syntax errors; 31 unresolved names (20%)
+
+!ENTRY org.eclipse.cdt.ui 4 0 2025-03-02 15:51:02.854
+!MESSAGE Error in CDT UI during reconcile
+!STACK 1
+C Model Exception: C Model Status [Element main.c does not exist.]
+	at org.eclipse.cdt.internal.core.model.CElement.newNotPresentException(CElement.java:485)
+	at org.eclipse.cdt.internal.core.model.TranslationUnit.makeConsistent(TranslationUnit.java:583)
+	at org.eclipse.cdt.internal.core.model.ReconcileWorkingCopyOperation.executeOperation(ReconcileWorkingCopyOperation.java:65)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.execute(CModelOperation.java:346)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.run(CModelOperation.java:613)
+	at org.eclipse.cdt.internal.core.model.CModelOperation.runOperation(CModelOperation.java:641)
+	at org.eclipse.cdt.internal.core.model.WorkingCopy.reconcile(WorkingCopy.java:365)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:79)
+	at org.eclipse.cdt.internal.ui.text.CReconcilingStrategy.reconcile(CReconcilingStrategy.java:64)
+	at org.eclipse.cdt.internal.ui.text.CompositeReconcilingStrategy.reconcile(CompositeReconcilingStrategy.java:89)
+	at org.eclipse.cdt.internal.ui.text.CCompositeReconcilingStrategy.reconcile(CCompositeReconcilingStrategy.java:90)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.process(MonoReconciler.java:78)
+	at org.eclipse.cdt.internal.ui.text.CReconciler.process(CReconciler.java:346)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:207)
+!SUBENTRY 1 org.eclipse.cdt.core 4 969 2025-03-02 15:51:02.854
+!MESSAGE Element main.c does not exist.
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 21:48:00.376
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 73 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 21:48:00.377
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 21:48:00.381
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 73 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 21:48:00.382
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 23:17:54.317
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 98 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 23:17:54.317
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 23:17:54.322
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 98 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 23:17:54.322
+!MESSAGE Existing sessions are:

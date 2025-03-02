@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Rename resource &apos;hello/Core/Inc/lock.h&apos; to &apos;spinlock.h&apos;" description="Rename resource &apos;lock.h&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Inc/lock.h" name="spinlock.h" stamp="1740882410520" updateReferences="true"/>&#x0A;<refactoring comment="Rename resource &apos;hello/Core/Src/lock.c&apos; to &apos;spinlock.c&apos;" description="Rename resource &apos;lock.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Core/Src/lock.c" name="spinlock.c" stamp="1740882418585" updateReferences="true"/>
+</session>

@@ -1,6 +1,7 @@
 "./Core/Src/ec11.o"
 "./Core/Src/key.o"
 "./Core/Src/main.o"
+"./Core/Src/spinlock.o"
 "./Core/Src/stm32f1xx_hal_msp.o"
 "./Core/Src/stm32f1xx_it.o"
 "./Core/Src/syscalls.o"

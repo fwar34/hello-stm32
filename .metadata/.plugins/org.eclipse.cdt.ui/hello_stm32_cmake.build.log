@@ -1,0 +1,6 @@
+11:44:13 **** Incremental Build of configuration Debug for project hello_stm32_cmake ****
+cmake --build Debug 
+[100%] Built target hello_stm32_cmake
+
+11:44:14 Build Finished. 0 errors, 0 warnings. (took 932ms)
+
