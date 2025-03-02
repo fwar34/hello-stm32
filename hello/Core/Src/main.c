@@ -35,18 +35,17 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define LockBufForever() LockBuf(0)
 #define KEY_BUF_SIZE 4
+#define KEY0 0
+#define EC11_KEY 1
 #define KEY_DEBOUNCING_TIME_10MS 10
-#define KEY_CLICK_TIME_200MS 200
-#define KEY_HOLD_TIME_300MS 300
 #define KEY_DOUBLE_TIME_500MS 500
 #define KEY_LONG_CLICK_TIME_700MS 700
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+#define LockBufForever() LockBuf(0)
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -84,9 +83,9 @@ typedef enum
 // 按键主状态
 typedef enum {
 	EC11_KEY_INVALID,
-	EC11_KEY_CLICK,	 // 单击
+	EC11_KEY_PRESS, // 按下
+	EC11_KEY_CLICK,	 // 单击（按下后释放触发）
 	EC11_KEY_DOUBLE_CLICK, // 双击
-	EC11_KEY_HOLD, // 按住
 	EC11_KEY_LONG_CLICK, // 长按
 	EC11_KEY_LEFT_ROTATE, // 向左旋转一下
 	EC11_KEY_RIGHT_ROTATE, // 向右旋转一下
@@ -94,9 +93,15 @@ typedef enum {
 	EC11_KEY_HOLD_RIGHT_ROTATE, // 按住向右旋转一下
 } Ec11KeyState;
 
-const char* keyEvent[] = {
-	"",
-	"click", "double_click", "hold", "long_click", "left_rotate", "right_rotate", "hold_left_rotate", "hold_right_rotate"
+const char *keyIndexNameArray[] = {
+		"key0",
+		"ec11_key"
+};
+
+const char *keyStateNameArray[] = {
+	"invalid",
+	"press", "click", "double_click", "long_click",
+	"left_rotate", "right_rotate", "hold_left_rotate", "hold_right_rotate"
 };
 
 typedef void (*ItemCallback)();
@@ -142,6 +147,7 @@ static Ec11KeyStateMachineItem ec11StateMachineTable[] = {
 };
 
 typedef struct {
+	uint8_t keyIndex;
 	uint8_t keyState;
 	uint32_t encodeCounter;
 } KeyInfo;
@@ -271,6 +277,9 @@ void ProcessClickPressDebouncing()
 			ec11Encoder.ec11StateMachine.currentStep = KEY_STEP_RELEASE_DEBOUNCING;
 			ec11Encoder.lastPressTick = currTick; // 保存识别按下的tick
 			ec11Encoder.debouncingTick = 0; // 重置去抖tick，为释放去抖准备
+
+			KeyInfo keyInfo = { EC11_KEY, EC11_KEY_PRESS, 0 };
+			WriteKeyInfo(&keyInfo);
 		}
 	}
 }
@@ -297,11 +306,9 @@ void ProcessClickRelease()
 	} else {
 		KeyInfo keyInfo = { EC11_KEY_INVALID, 0 };
 		uint32_t resetLevelTick = HAL_GetTick() - ec11Encoder.lastPressTick;
-		if (resetLevelTick < KEY_HOLD_TIME_300MS) { // 单击
+		if (resetLevelTick <= KEY_LONG_CLICK_TIME_700MS) { // 单击
 			ec11Encoder.lastClickTick = HAL_GetTick(); // 更新单击tick，判断双击的时候使用
 			keyInfo.keyState = EC11_KEY_CLICK;
-		} else if (resetLevelTick >= KEY_HOLD_TIME_300MS && resetLevelTick <= KEY_LONG_CLICK_TIME_700MS) { // Hold
-			keyInfo.keyState = EC11_KEY_HOLD;
 		} else if (resetLevelTick > KEY_LONG_CLICK_TIME_700MS) { // 长按
 			keyInfo.keyState = EC11_KEY_LONG_CLICK;
 		}
@@ -436,12 +443,17 @@ void ProcessKey()
 	uint8_t count = 0;
 	if (ReadKeyInfo(&keyInfo, &count)) {
 		static char message[100];
-		sprintf(message, "read keyState(%s,%d) encodeCounter(%ld) remain count(%d) currentTick(%ld) lastTick(%ld)\n",
-				keyEvent[keyInfo.keyState], keyInfo.keyState, keyInfo.encodeCounter, count, currentTick, lastTick);
+		sprintf(message, "read %s keyState(%s,%d) encodeCounter(%ld) \nremain count(%d) currentTick(%ld) lastTick(%ld)\n",
+				keyIndexNameArray[keyInfo.keyIndex], keyStateNameArray[keyInfo.keyState],
+				keyInfo.keyState, keyInfo.encodeCounter, count, currentTick, lastTick);
 		HAL_UART_Transmit_IT(&huart2, (uint8_t*)message, strlen(message));
 
-		if (keyInfo.keyState == EC11_KEY_CLICK) {
-			HAL_GPIO_TogglePin(Led0_GPIO_Port, Led0_Pin);
+		if (keyInfo.keyIndex == EC11_KEY) {
+			if (keyInfo.keyState == EC11_KEY_PRESS) {
+
+			} else if (keyInfo.keyState == EC11_KEY_CLICK) {
+				HAL_GPIO_TogglePin(Led0_GPIO_Port, Led0_Pin);
+			}
 		}
 	}
 }
