@@ -1389,3 +1389,27 @@ C Model Exception: C Model Status [Element main.c does not exist.]
 
 !ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-02 23:17:54.322
 !MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-03 23:36:32.408
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 104 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-03 23:36:32.410
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-03 23:36:32.414
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 104 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-03 23:36:32.415
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-03 23:39:49.829
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 105 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-03 23:39:49.829
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-03 23:39:49.833
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 105 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-03 23:39:49.833
+!MESSAGE Existing sessions are:
