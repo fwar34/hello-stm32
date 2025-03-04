@@ -2,7 +2,7 @@
 /**
  ******************************************************************************
  * @file           : main.c
- * @brief          : Main program body
+ * @brief          : ec11按键识别，使用stm32 TIM4，1ms间隔
  ******************************************************************************
  * @attention
  *
@@ -38,9 +38,11 @@
 #define KEY_BUF_SIZE 4
 #define KEY0 0
 #define EC11_KEY 1
+// 按键消抖时间
 #define KEY_DEBOUNCING_TIME_10MS 10
+// 双击阈值
 #define KEY_DOUBLE_TIME_200MS 200
-#define KEY_CLICK_MAX_TIME_400MS 400
+// 单击识别长按
 #define KEY_LONG_CLICK_TIME_700MS 700
 /* USER CODE END PD */
 
@@ -88,11 +90,10 @@ static int32_t encodeCounter = 0;
 // 按键子状态
 typedef enum
 {
-	KEY_STEP_PRESS, // 刚按下电平改变
-	KEY_STEP_PRESS_DEBOUNCING, // 按下去抖
+	KEY_STEP_PRESS, // 按下
+	KEY_STEP_PRESS_DEBOUNCING, // 按下去抖（可以和按下合并）
 	KEY_STEP_RELEASE_DEBOUNCING, // 释放去抖
-	KEY_STEP_HOLD, // 抖动过后电平稳定
-	KEY_STEP_RELEASE, // 释放
+	KEY_STEP_RELEASE, // 释放（可以和释放去抖合并）
 } KeyStep;
 
 // 按键主状态
@@ -104,8 +105,8 @@ typedef enum {
 	EC11_KEY_LONG_CLICK, // 长按
 	EC11_KEY_LEFT_ROTATE, // 向左旋转一下
 	EC11_KEY_RIGHT_ROTATE, // 向右旋转一下
-	EC11_KEY_HOLD_LEFT_ROTATE, // 按住向左旋转一下
-	EC11_KEY_HOLD_RIGHT_ROTATE, // 按住向右旋转一下
+	EC11_KEY_PRESS_LEFT_ROTATE, // 按住向左旋转一下
+	EC11_KEY_PRESS_RIGHT_ROTATE, // 按住向右旋转一下
 } Ec11KeyState;
 
 const char *keyIndexNameArray[] = {
@@ -385,7 +386,6 @@ void ProcessDoubleClickRelease()
 }
 
 static void Ec11TickProcess() {
-	static char message[100];
 	static Ec11DirectionState ec11CurrentState = EC11_DIRECTION_INVALID;
 	static GPIO_PinState lastALevel = GPIO_PIN_SET;
 	static GPIO_PinState lastBLevel = GPIO_PIN_SET;
@@ -410,22 +410,10 @@ static void Ec11TickProcess() {
 					ec11CurrentState = EC11_DIRECTION_INVALID;
 				} else if (switchBCounter == 1) {
 					encodeCounter--;
-					sprintf(message, "--encoderCount = %ld\n", encodeCounter);
-//					HAL_UART_Transmit_IT(&huart2, (uint8_t*) message,
-//							strlen(message));
-//					HAL_GPIO_TogglePin(Led0_GPIO_Port, Led0_Pin);
-
-//					if (ec11Encoder.lastClickTick != 0) {
-//						KeyInfo click = { EC11_KEY, EC11_KEY_CLICK, 0 };
-//						WriteKeyInfo(&click);
-//						ec11Encoder.lastClickTick = 0;
-////						HAL_UART_Transmit_IT(&huart2, "xxxx", strlen("xxxx"));
-//					}
-
 					KeyInfo keyInfo = { EC11_KEY, EC11_KEY_LEFT_ROTATE, encodeCounter };
 					if (ec11Encoder.ec11StateMachine.currentStep == KEY_STEP_RELEASE_DEBOUNCING) {
 						ec11Encoder.hasRotate = true;
-						keyInfo.keyState = EC11_KEY_HOLD_LEFT_ROTATE;
+						keyInfo.keyState = EC11_KEY_PRESS_LEFT_ROTATE;
 					}
 					WriteKeyInfo(&keyInfo);
 				}
@@ -434,22 +422,10 @@ static void Ec11TickProcess() {
 					ec11CurrentState = EC11_DIRECTION_INVALID;
 				} else if (switchBCounter == 2) {
 					encodeCounter++;
-					sprintf(message, "++encoderCount = %ld\n", encodeCounter);
-//					HAL_UART_Transmit_IT(&huart2, (uint8_t*) message,
-//							strlen(message));
-//					HAL_GPIO_TogglePin(Led0_GPIO_Port, Led0_Pin);
-
-//					if (ec11Encoder.lastClickTick != 0) {
-//						KeyInfo click = { EC11_KEY, EC11_KEY_CLICK, 0 };
-//						WriteKeyInfo(&click);
-//						ec11Encoder.lastClickTick = 0;
-////						HAL_UART_Transmit_IT(&huart2, "yyyy", strlen("yyyy"));
-//					}
-
 					KeyInfo keyInfo = { EC11_KEY, EC11_KEY_RIGHT_ROTATE, encodeCounter };
 					if (ec11Encoder.ec11StateMachine.currentStep == KEY_STEP_RELEASE_DEBOUNCING) {
 						ec11Encoder.hasRotate = true;
-						keyInfo.keyState = EC11_KEY_HOLD_RIGHT_ROTATE;
+						keyInfo.keyState = EC11_KEY_PRESS_RIGHT_ROTATE;
 					}
 					WriteKeyInfo(&keyInfo);
 				}
