@@ -492,7 +492,6 @@ void ProcessKey()
 		return;
 	}
 
-	lastTick = currentTick;
 	KeyInfo keyInfo;
 	uint8_t count = 0;
 	if (ReadKeyInfo(&keyInfo, &count)) {
@@ -510,6 +509,7 @@ void ProcessKey()
 			}
 		}
 	}
+	lastTick = currentTick;
 }
 /* USER CODE END 0 */
 
