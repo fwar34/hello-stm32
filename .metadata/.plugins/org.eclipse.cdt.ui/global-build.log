@@ -1,4 +1,4 @@
-23:36:10 **** Incremental Build of configuration Debug for project hello ****
+08:53:11 **** Incremental Build of configuration Debug for project hello ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "hello.elf" @"objects.list"   -mcpu=cortex-m3 -T"E:\STM32CubeIDE_Workspace\hello\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -7,26 +7,12 @@ Finished building target: hello.elf
 arm-none-eabi-size  hello.elf 
 arm-none-eabi-objdump -h -S hello.elf  > "hello.list"
    text	   data	    bss	    dec	    hex	filename
-  15828	    208	   2328	  18364	   47bc	hello.elf
+  15768	    204	   2428	  18400	   47e0	hello.elf
 Finished building: default.size.stdout
  
 Finished building: hello.list
  
-23:36:22 **** Incremental Build of configuration Debug for project hello ****
-make -j8 all 
-arm-none-eabi-size  hello.elf 
-   text	   data	    bss	    dec	    hex	filename
-  15828	    208	   2328	  18364	   47bc	hello.elf
-Finished building: default.size.stdout
- 
-23:39:40 **** Incremental Build of configuration Debug for project hello ****
-make -j8 all 
-arm-none-eabi-size  hello.elf 
-   text	   data	    bss	    dec	    hex	filename
-  15828	    208	   2328	  18364	   47bc	hello.elf
-Finished building: default.size.stdout
- 
-23:42:17 **** Incremental Build of configuration Debug for project hello ****
+08:53:41 **** Incremental Build of configuration Debug for project hello ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "hello.elf" @"objects.list"   -mcpu=cortex-m3 -T"E:\STM32CubeIDE_Workspace\hello\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -35,12 +21,19 @@ Finished building target: hello.elf
 arm-none-eabi-size  hello.elf 
 arm-none-eabi-objdump -h -S hello.elf  > "hello.list"
    text	   data	    bss	    dec	    hex	filename
-  15820	    208	   2328	  18356	   47b4	hello.elf
+  15768	    204	   2428	  18400	   47e0	hello.elf
 Finished building: default.size.stdout
  
 Finished building: hello.list
  
-23:45:05 **** Incremental Build of configuration Debug for project hello ****
+08:55:18 **** Incremental Build of configuration Debug for project hello ****
+make -j8 all 
+arm-none-eabi-size  hello.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15768	    204	   2428	  18400	   47e0	hello.elf
+Finished building: default.size.stdout
+ 
+08:57:06 **** Incremental Build of configuration Debug for project hello ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "hello.elf" @"objects.list"   -mcpu=cortex-m3 -T"E:\STM32CubeIDE_Workspace\hello\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -49,12 +42,47 @@ Finished building target: hello.elf
 arm-none-eabi-size  hello.elf 
 arm-none-eabi-objdump -h -S hello.elf  > "hello.list"
    text	   data	    bss	    dec	    hex	filename
-  15820	    208	   2328	  18356	   47b4	hello.elf
+  15768	    204	   2428	  18400	   47e0	hello.elf
 Finished building: default.size.stdout
  
 Finished building: hello.list
  
-23:46:50 **** Incremental Build of configuration Debug for project hello ****
+08:58:41 **** Incremental Build of configuration Debug for project hello ****
+make -j8 all 
+arm-none-eabi-size  hello.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15768	    204	   2428	  18400	   47e0	hello.elf
+Finished building: default.size.stdout
+ 
+09:00:07 **** Incremental Build of configuration Debug for project hello ****
+make -j8 all 
+arm-none-eabi-size  hello.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15768	    204	   2428	  18400	   47e0	hello.elf
+Finished building: default.size.stdout
+ 
+09:00:35 **** Incremental Build of configuration Debug for project hello ****
+make -j8 all 
+arm-none-eabi-size  hello.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15768	    204	   2428	  18400	   47e0	hello.elf
+Finished building: default.size.stdout
+ 
+09:05:06 **** Incremental Build of configuration Debug for project hello ****
+make -j8 all 
+arm-none-eabi-size  hello.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15768	    204	   2428	  18400	   47e0	hello.elf
+Finished building: default.size.stdout
+ 
+09:06:43 **** Incremental Build of configuration Debug for project hello ****
+make -j8 all 
+arm-none-eabi-size  hello.elf 
+   text	   data	    bss	    dec	    hex	filename
+  15768	    204	   2428	  18400	   47e0	hello.elf
+Finished building: default.size.stdout
+ 
+09:07:56 **** Incremental Build of configuration Debug for project hello ****
 make -j8 all 
 arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 arm-none-eabi-gcc -o "hello.elf" @"objects.list"   -mcpu=cortex-m3 -T"E:\STM32CubeIDE_Workspace\hello\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
@@ -63,68 +91,8 @@ Finished building target: hello.elf
 arm-none-eabi-size  hello.elf 
 arm-none-eabi-objdump -h -S hello.elf  > "hello.list"
    text	   data	    bss	    dec	    hex	filename
-  15824	    208	   2328	  18360	   47b8	hello.elf
+  15768	    204	   2428	  18400	   47e0	hello.elf
 Finished building: default.size.stdout
  
 Finished building: hello.list
- 
-23:49:50 **** Incremental Build of configuration Debug for project hello ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-../Core/Src/main.c: In function 'ProcessDoubleClickPress':
-../Core/Src/main.c:335:46: error: 'currTick' undeclared (first use in this function); did you mean 'uwTick'?
-  335 |                 ec11Encoder.debouncingTick = currTick;
-      |                                              ^~~~~~~~
-      |                                              uwTick
-../Core/Src/main.c:335:46: note: each undeclared identifier is reported only once for each function it appears in
-make: *** [Core/Src/subdir.mk:43: Core/Src/main.o] Error 1
-"make -j8 all" terminated with exit code 2. Build might be incomplete.
-23:51:01 **** Incremental Build of configuration Debug for project hello ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "hello.elf" @"objects.list"   -mcpu=cortex-m3 -T"E:\STM32CubeIDE_Workspace\hello\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: hello.elf
- 
-arm-none-eabi-size  hello.elf 
-arm-none-eabi-objdump -h -S hello.elf  > "hello.list"
-   text	   data	    bss	    dec	    hex	filename
-  15828	    208	   2328	  18364	   47bc	hello.elf
-Finished building: default.size.stdout
- 
-Finished building: hello.list
- 
-08:17:06 **** Incremental Build of configuration Debug for project hello ****
-make -j8 all 
-arm-none-eabi-size  hello.elf 
-   text	   data	    bss	    dec	    hex	filename
-  15828	    208	   2328	  18364	   47bc	hello.elf
-Finished building: default.size.stdout
- 
-08:18:10 **** Incremental Build of configuration Debug for project hello ****
-make -j8 all 
-arm-none-eabi-size  hello.elf 
-   text	   data	    bss	    dec	    hex	filename
-  15828	    208	   2328	  18364	   47bc	hello.elf
-Finished building: default.size.stdout
- 
-08:19:46 **** Incremental Build of configuration Debug for project hello ****
-make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
-arm-none-eabi-gcc -o "hello.elf" @"objects.list"   -mcpu=cortex-m3 -T"E:\STM32CubeIDE_Workspace\hello\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: hello.elf
- 
-arm-none-eabi-size  hello.elf 
-arm-none-eabi-objdump -h -S hello.elf  > "hello.list"
-   text	   data	    bss	    dec	    hex	filename
-  15828	    208	   2328	  18364	   47bc	hello.elf
-Finished building: default.size.stdout
- 
-Finished building: hello.list
- 
-08:20:55 **** Incremental Build of configuration Debug for project hello ****
-make -j8 all 
-arm-none-eabi-size  hello.elf 
-   text	   data	    bss	    dec	    hex	filename
-  15828	    208	   2328	  18364	   47bc	hello.elf
-Finished building: default.size.stdout
  
