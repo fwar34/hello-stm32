@@ -28,6 +28,6 @@ void KeyTickProcess()
 	if (keyPrevState == GPIO_PIN_RESET && keyCurState != GPIO_PIN_RESET) {
 		keyNum = KEY_0;
 		const char* keyProcessMsg = "Key0 pressed!\n";
-		HAL_UART_Transmit_IT(&huart2, (uint8_t*)keyProcessMsg, strlen(keyProcessMsg));
+		HAL_UART_Transmit(&huart2, (uint8_t*)keyProcessMsg, strlen(keyProcessMsg), 0);
 	}
 }

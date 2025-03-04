@@ -1413,3 +1413,98 @@ C Model Exception: C Model Status [Element main.c does not exist.]
 
 !ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-03 23:39:49.833
 !MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 13:39:12.733
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 144 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 13:39:12.733
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 13:39:12.737
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 144 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 13:39:12.737
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 14:02:11.026
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 150 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 14:02:11.027
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 14:02:11.030
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 150 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 14:02:11.030
+!MESSAGE Existing sessions are:
+
+!ENTRY org.eclipse.cdt.core 4 0 2025-03-04 14:10:42.097
+!MESSAGE Error: Global index scope has to be mapped to the global scope of a particular translation unit.
+!STACK 0
+java.lang.UnsupportedOperationException: Global index scope has to be mapped to the global scope of a particular translation unit.
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMGlobalScope.logInvalidCallError(PDOMGlobalScope.java:99)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMGlobalScope.find(PDOMGlobalScope.java:37)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.ASTManager.findInScope(ASTManager.java:697)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.ASTManager.classifyConflictingBindings(ASTManager.java:1443)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.ASTManager.handleConflictingBindings(ASTManager.java:1296)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.ASTManager.analyzeTextMatchesOfTranslationUnit(ASTManager.java:987)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.ASTManager.analyzeTextMatches(ASTManager.java:943)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.CRenameProcessorDelegate.analyzeTextMatches(CRenameProcessorDelegate.java:301)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.CRenameProcessorDelegate.checkFinalConditions(CRenameProcessorDelegate.java:234)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.CRenameProcessor.checkFinalConditions(CRenameProcessor.java:209)
+	at org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring.checkFinalConditions(ProcessorBasedRefactoring.java:227)
+	at org.eclipse.ltk.core.refactoring.CheckConditionsOperation.run(CheckConditionsOperation.java:86)
+	at org.eclipse.ltk.core.refactoring.CreateChangeOperation.run(CreateChangeOperation.java:122)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2453)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2478)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:89)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+
+!ENTRY org.eclipse.cdt.core 4 0 2025-03-04 14:10:42.132
+!MESSAGE Error: Global index scope has to be mapped to the global scope of a particular translation unit.
+!STACK 0
+java.lang.UnsupportedOperationException: Global index scope has to be mapped to the global scope of a particular translation unit.
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMGlobalScope.logInvalidCallError(PDOMGlobalScope.java:99)
+	at org.eclipse.cdt.internal.core.pdom.dom.PDOMGlobalScope.find(PDOMGlobalScope.java:37)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.ASTManager.findInScope(ASTManager.java:697)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.ASTManager.classifyConflictingBindings(ASTManager.java:1443)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.ASTManager.handleConflictingBindings(ASTManager.java:1296)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.ASTManager.analyzeTextMatchesOfTranslationUnit(ASTManager.java:987)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.ASTManager.analyzeTextMatches(ASTManager.java:943)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.CRenameProcessorDelegate.analyzeTextMatches(CRenameProcessorDelegate.java:301)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.CRenameProcessorDelegate.checkFinalConditions(CRenameProcessorDelegate.java:234)
+	at org.eclipse.cdt.internal.ui.refactoring.rename.CRenameProcessor.checkFinalConditions(CRenameProcessor.java:209)
+	at org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring.checkFinalConditions(ProcessorBasedRefactoring.java:227)
+	at org.eclipse.ltk.core.refactoring.CheckConditionsOperation.run(CheckConditionsOperation.java:86)
+	at org.eclipse.ltk.core.refactoring.CreateChangeOperation.run(CreateChangeOperation.java:122)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2453)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2478)
+	at org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter.run(WorkbenchRunnableAdapter.java:89)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:122)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 14:28:13.371
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 157 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 14:28:13.373
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 14:28:13.381
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 157 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 14:28:13.382
+!MESSAGE Existing sessions are:
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2025-03-04 16:15:44.534
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.gdb.internal.ui.actions.DsfTerminateCommand$3$1@10b25e67): Status OK: unknown code=0 OK' resulted in a rejected execution exception.
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 16:15:55.019
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 166 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 16:15:55.020
+!MESSAGE Existing sessions are:
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 16:15:55.025
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 166 (contextManager row 121)
+
+!ENTRY com.st.stm32cube.ide.mcu.debug 4 0 2025-03-04 16:15:55.025
+!MESSAGE Existing sessions are:
