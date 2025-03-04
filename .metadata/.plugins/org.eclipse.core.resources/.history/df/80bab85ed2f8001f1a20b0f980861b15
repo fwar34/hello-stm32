@@ -1,0 +1,14 @@
+#ifndef __CIRCLE_BUFFER_H_
+#define __CIRCLE_BUFFER_H_
+
+typedef struct {
+	KeyInfo keyInfoBuf[KEY_BUF_SIZE];
+	uint8_t readIndex;
+	uint8_t writeIndex;
+	uint8_t count;
+	volatile SpinLock bufLock;
+} Ec11KeyCircleBuf;
+
+void PushToBuffer();
+
+#endif
