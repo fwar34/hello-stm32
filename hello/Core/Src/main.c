@@ -24,6 +24,8 @@
 #include "stdio.h"
 #include "key.h"
 #include "ec11.h"
+#include "dht11.h"
+#include "timer.h"
 #include <string.h>
 /* USER CODE END Includes */
 
@@ -59,10 +61,10 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
 }
 
 // 安全的发送函数
-void send_data_safely(uint8_t *data, uint16_t size) {
+void send_data_safely(char *data, uint16_t size) {
     while (!uart_tx_complete); // 等待上一次发送完成
     uart_tx_complete = 0; // 标记开始新的发送
-    HAL_UART_Transmit_IT(&huart2, data, size);
+    HAL_UART_Transmit_IT(&huart2, (uint8_t*)data, size);
 }
 /* USER CODE END PV */
 
@@ -82,6 +84,7 @@ static uint32_t timerCounter = 0;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	timerCounter++;
 	Ec11StateMachineProcess();
+	Dht11Process();
 }
 
 void ProcessKey()
@@ -91,6 +94,7 @@ void ProcessKey()
 	if (currentTick - lastTick < 1) {
 		return;
 	}
+	lastTick = currentTick;
 
 	KeyInfo keyInfo;
 	uint8_t remainCount = 0;
@@ -107,20 +111,42 @@ void ProcessKey()
 					keyInfo.encodeCounter, remainCount, currentTick, lastTick,
 					timerCounter);
 
-			send_data_safely((uint8_t*) message, strlen(message));
+			send_data_safely(message, strlen(message));
 
 			if (keyInfo.keyIndex == EC11_KEY) {
 				if (keyInfo.keyState == EC11_KEY_PRESS) {
 
 				} else if (keyInfo.keyState == EC11_KEY_CLICK) {
 					HAL_GPIO_TogglePin(Led0_GPIO_Port, Led0_Pin);
+				} else if (keyInfo.keyState == EC11_KEY_DOUBLE_CLICK) {
+					HAL_GPIO_TogglePin(testIO_GPIO_Port, testIO_Pin);
+					delay_us(20);
+					HAL_GPIO_TogglePin(testIO_GPIO_Port, testIO_Pin);
+					static char msg[100];
+					sprintf(msg, "%s\n", "testxxxx");
+					send_data_safely(msg, strlen(msg));
 				}
 			}
 		}
 
 	} while (remainCount != 0);
+}
 
+void ProcessDth11()
+{
+	static uint32_t lastTick = 0;
+	uint32_t currentTick = HAL_GetTick();
+	if (currentTick - lastTick < 1000) {
+		return;
+	}
 	lastTick = currentTick;
+
+	Dht11Result result;
+	GetDht11Result(&result);
+	static char message[100];
+	sprintf(message, "humidity: %.2f, temperature: %.2f\n",
+			result.humidity, result.temperature);
+	send_data_safely(message, strlen(message));
 }
 /* USER CODE END 0 */
 
@@ -158,12 +184,14 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	HAL_TIM_Base_Start_IT(&htim4);
 	Ec11EncoderInit();
+	TIM3_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	while (1) {
 		ProcessKey();
+		ProcessDth11();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -303,9 +331,13 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(Led0_GPIO_Port, Led0_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(testIO_GPIO_Port, testIO_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : Led0_Pin */
   GPIO_InitStruct.Pin = Led0_Pin;
@@ -320,11 +352,24 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(Key0_GPIO_Port, &GPIO_InitStruct);
 
+  /*Configure GPIO pin : testIO_Pin */
+  GPIO_InitStruct.Pin = testIO_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(testIO_GPIO_Port, &GPIO_InitStruct);
+
   /*Configure GPIO pins : ec11_A_Pin ec11_B_Pin ec11_Key_Pin */
   GPIO_InitStruct.Pin = ec11_A_Pin|ec11_B_Pin|ec11_Key_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : dht11_Pin */
+  GPIO_InitStruct.Pin = dht11_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(dht11_GPIO_Port, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

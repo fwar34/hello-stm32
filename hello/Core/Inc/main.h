@@ -61,15 +61,19 @@ void Error_Handler(void);
 #define Led0_GPIO_Port GPIOC
 #define Key0_Pin GPIO_PIN_0
 #define Key0_GPIO_Port GPIOA
+#define testIO_Pin GPIO_PIN_0
+#define testIO_GPIO_Port GPIOB
 #define ec11_A_Pin GPIO_PIN_8
 #define ec11_A_GPIO_Port GPIOA
 #define ec11_B_Pin GPIO_PIN_9
 #define ec11_B_GPIO_Port GPIOA
 #define ec11_Key_Pin GPIO_PIN_10
 #define ec11_Key_GPIO_Port GPIOA
+#define dht11_Pin GPIO_PIN_9
+#define dht11_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
-
+extern void send_data_safely(char *data, uint16_t size);
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
