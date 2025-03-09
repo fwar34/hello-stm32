@@ -4,5 +4,5 @@
 ../Core/Src/dht11.c:80:13:CheckSum	1
 ../Core/Src/dht11.c:85:13:Dht11Input	1
 ../Core/Src/dht11.c:94:6:StartMeasure	1
-../Core/Src/dht11.c:103:6:ReadData	12
-../Core/Src/dht11.c:146:6:GetDht11Result	1
+../Core/Src/dht11.c:103:6:ReadData	18
+../Core/Src/dht11.c:196:6:GetDht11Result	1

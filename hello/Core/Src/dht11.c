@@ -110,17 +110,59 @@ void ReadData()
     __disable_irq();  // 禁用中断
 	StartTimer3();
 	HAL_GPIO_WritePin(ec11_A_GPIO_Port, ec11_A_Pin, GPIO_PIN_SET);
+	uint32_t lastTick = Timer3Count();
 	Dht11Input();
-	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_SET);
-	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_RESET);
-	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_SET);
-	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_RESET);
+	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_SET) {
+		if (Timer3Count() - lastTick > 50) {
+			__enable_irq();
+			StopTimer3();
+			dht11Context.currentState = DHT_STATE_START_MEASURE;
+			return;
+		}
+	}
+
+	lastTick = Timer3Count();
+	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_RESET) {
+		if (Timer3Count() - lastTick > 100) {
+			__enable_irq();
+			StopTimer3();
+			dht11Context.currentState = DHT_STATE_START_MEASURE;
+			return;
+		}
+	}
+
+	lastTick = Timer3Count();
+	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_SET) {
+		if (Timer3Count() - lastTick > 100) {
+			__enable_irq();
+			StopTimer3();
+			dht11Context.currentState = DHT_STATE_START_MEASURE;
+			return;
+		}
+	}
+
+	lastTick = Timer3Count();
+	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_RESET) {
+		if (Timer3Count() - lastTick > 60) {
+			__enable_irq();
+			StopTimer3();
+			dht11Context.currentState = DHT_STATE_START_MEASURE;
+			return;
+		}
+	}
 
 	uint8_t data[DHT11_DATA_BYTE_NUM_5] = {0};
-	uint32_t lastTick = Timer3Count();
+	lastTick = Timer3Count();
 	for (uint8_t i = 0; i < DHT11_DATA_BYTE_NUM_5; ++i) {
 		for (uint8_t j = 0; j < DHT11_DATA_BIT_NUM_OF_BYTE_8; ++j) {
-			while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_SET);
+			while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_SET) {
+				if (Timer3Count() - lastTick > 100) {
+					__enable_irq();
+					StopTimer3();
+					dht11Context.currentState = DHT_STATE_START_MEASURE;
+					return;
+				}
+			}
 			uint32_t delta = Timer3Count() - lastTick;
 			if (delta > DHT11_DATA_BIT_THRESHOLD_50US) {
 				data[i] = (data[i] << 1) | 0x1;
@@ -128,7 +170,15 @@ void ReadData()
 				data[i] = data[i] << 1;
 			}
 
-			while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_RESET);
+			lastTick = Timer3Count();
+			while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_RESET) {
+				if (Timer3Count() - lastTick > 60) {
+					__enable_irq();
+					StopTimer3();
+					dht11Context.currentState = DHT_STATE_START_MEASURE;
+					return;
+				}
+			}
 			lastTick = Timer3Count();
 		}
 	}
