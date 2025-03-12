@@ -26,6 +26,7 @@
 #include "ec11.h"
 #include "dht11.h"
 #include "timer.h"
+#include "st7735s.h"
 #include <string.h>
 /* USER CODE END Includes */
 
@@ -148,6 +149,24 @@ void ProcessDth11()
 			result.humidity, result.temperature);
 	send_data_safely(message, strlen(message));
 }
+
+void ProcessLcd()
+{
+	static uint32_t lastTick = 0;
+	uint32_t currentTick = HAL_GetTick();
+	if (currentTick - lastTick < 1000) {
+		return;
+	}
+	lastTick = currentTick;
+
+	static uint16_t color = BLACK_RGB565;
+	LcdClear(color);
+	if (color % 2 == 0) {
+		color += 33;
+	} else {
+		color += 11;
+	}
+}
 /* USER CODE END 0 */
 
 /**
@@ -185,6 +204,7 @@ int main(void)
 	HAL_TIM_Base_Start_IT(&htim4);
 	Ec11EncoderInit();
 	TIM3_Init();
+	LcdInit();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -192,6 +212,7 @@ int main(void)
 	while (1) {
 		ProcessKey();
 		ProcessDth11();
+		ProcessLcd();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -337,7 +358,16 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(Led0_GPIO_Port, Led0_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(spi_scl_GPIO_Port, spi_scl_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(spi_mosi_GPIO_Port, spi_mosi_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(testIO_GPIO_Port, testIO_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, spi_blk_Pin|spi_dc_Pin|spi_res_Pin|spi_cs_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin : Led0_Pin */
   GPIO_InitStruct.Pin = Led0_Pin;
@@ -352,12 +382,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(Key0_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : testIO_Pin */
-  GPIO_InitStruct.Pin = testIO_Pin;
+  /*Configure GPIO pins : spi_scl_Pin spi_mosi_Pin */
+  GPIO_InitStruct.Pin = spi_scl_Pin|spi_mosi_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : testIO_Pin spi_blk_Pin */
+  GPIO_InitStruct.Pin = testIO_Pin|spi_blk_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(testIO_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : ec11_A_Pin ec11_B_Pin ec11_Key_Pin */
   GPIO_InitStruct.Pin = ec11_A_Pin|ec11_B_Pin|ec11_Key_Pin;
@@ -370,6 +407,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(dht11_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : spi_dc_Pin spi_res_Pin spi_cs_Pin */
+  GPIO_InitStruct.Pin = spi_dc_Pin|spi_res_Pin|spi_cs_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */

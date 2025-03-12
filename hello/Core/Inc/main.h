@@ -61,6 +61,10 @@ void Error_Handler(void);
 #define Led0_GPIO_Port GPIOC
 #define Key0_Pin GPIO_PIN_0
 #define Key0_GPIO_Port GPIOA
+#define spi_scl_Pin GPIO_PIN_5
+#define spi_scl_GPIO_Port GPIOA
+#define spi_mosi_Pin GPIO_PIN_7
+#define spi_mosi_GPIO_Port GPIOA
 #define testIO_Pin GPIO_PIN_0
 #define testIO_GPIO_Port GPIOB
 #define ec11_A_Pin GPIO_PIN_8
@@ -69,8 +73,16 @@ void Error_Handler(void);
 #define ec11_B_GPIO_Port GPIOA
 #define ec11_Key_Pin GPIO_PIN_10
 #define ec11_Key_GPIO_Port GPIOA
-#define dht11_Pin GPIO_PIN_9
-#define dht11_GPIO_Port GPIOB
+#define dht11_Pin GPIO_PIN_15
+#define dht11_GPIO_Port GPIOA
+#define spi_blk_Pin GPIO_PIN_6
+#define spi_blk_GPIO_Port GPIOB
+#define spi_dc_Pin GPIO_PIN_7
+#define spi_dc_GPIO_Port GPIOB
+#define spi_res_Pin GPIO_PIN_8
+#define spi_res_GPIO_Port GPIOB
+#define spi_cs_Pin GPIO_PIN_9
+#define spi_cs_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 extern void send_data_safely(char *data, uint16_t size);

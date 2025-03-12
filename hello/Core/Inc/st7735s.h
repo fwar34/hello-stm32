@@ -1,0 +1,23 @@
+/*
+ * st7735s.h
+ *
+ *  Created on: Mar 12, 2025
+ *      Author: fwar3
+ */
+
+#ifndef INC_ST7735S_H_
+#define INC_ST7735S_H_
+
+#include <stdint.h>
+#include <stdbool.h>
+
+
+#define BLACK_RGB565 0x0000
+#define WHITE_RGB565 0xFFFF
+#define XXXXX_RGB565 0x1234
+
+void LcdInit();
+void LcdReset();
+void LcdClear(uint16_t color);
+
+#endif /* INC_ST7735S_H_ */
