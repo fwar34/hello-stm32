@@ -81,96 +81,7 @@ void LcdSetParam()
  {
 	LcdWriteCmd(0x11); // 退出睡眠
 	HAL_Delay(120	);
-#if 0
-	LcdWriteCmd(0xB1);
-	LcdWriteData(0x05);
-	LcdWriteData(0x3C);
-	LcdWriteData(0x3C);
 
-	LcdWriteCmd(0xB2);
-	LcdWriteData(0x05);
-	LcdWriteData(0x3C);
-	LcdWriteData(0x3C);
-
-	LcdWriteCmd(0xB3);
-	LcdWriteData(0x05);
-	LcdWriteData(0x3C);
-	LcdWriteData(0x3C);
-	LcdWriteData(0x05);
-	LcdWriteData(0x3C);
-	LcdWriteData(0x3C);
-
-	LcdWriteCmd(0xB4);
-	LcdWriteData(0x03);
-
-	LcdWriteCmd(0xC0);
-	LcdWriteData(0x28);
-	LcdWriteData(0x08);
-	LcdWriteData(0x04);
-
-	LcdWriteCmd(0xC1);
-	LcdWriteData(0XC0);
-
-	LcdWriteCmd(0xC2);
-	LcdWriteData(0x0D);
-	LcdWriteData(0x00);
-
-	LcdWriteCmd(0xC3);
-	LcdWriteData(0x8D);
-	LcdWriteData(0x2A);
-
-	LcdWriteCmd(0xC4);
-	LcdWriteData(0x8D);
-	LcdWriteData(0xEE);
-
-	LcdWriteCmd(0xC5);
-	LcdWriteData(0x1A);
-
-	LcdWriteCmd(0x36);
-	LcdWriteData(0xC0);
-
-	LcdWriteCmd(0xE0);
-	LcdWriteData(0x04);
-	LcdWriteData(0x22);
-	LcdWriteData(0x07);
-	LcdWriteData(0x0A);
-	LcdWriteData(0x2E);
-	LcdWriteData(0x30);
-	LcdWriteData(0x25);
-	LcdWriteData(0x2A);
-	LcdWriteData(0x28);
-	LcdWriteData(0x26);
-	LcdWriteData(0x2E);
-	LcdWriteData(0x3A);
-	LcdWriteData(0x00);
-	LcdWriteData(0x01);
-	LcdWriteData(0x03);
-	LcdWriteData(0x13);
-
-	LcdWriteCmd(0xE1);
-	LcdWriteData(0x04);
-	LcdWriteData(0x16);
-	LcdWriteData(0x06);
-	LcdWriteData(0x0D);
-	LcdWriteData(0x2D);
-	LcdWriteData(0x26);
-	LcdWriteData(0x23);
-	LcdWriteData(0x27);
-	LcdWriteData(0x27);
-	LcdWriteData(0x25);
-	LcdWriteData(0x2D);
-	LcdWriteData(0x3B);
-	LcdWriteData(0x00);
-	LcdWriteData(0x01);
-	LcdWriteData(0x04);
-	LcdWriteData(0x13);
-
-	LcdWriteCmd(0x3A); // 像素格式设置
-	LcdWriteData(0x05); // 16位像素格式，rgb565
-
-	LcdWriteCmd(0x29); // 开启显示
-
-#else
 	LcdWriteCmd(0x21); 
 	LcdWriteCmd(0x21); 
 
@@ -260,9 +171,7 @@ void LcdSetParam()
 	LcdWriteCmd(0x36);
 	LcdWriteData(0xA8);//
 
-	LcdWriteCmd(0x29); 
-
-#endif
+	LcdWriteCmd(0x29);
 }
 
 

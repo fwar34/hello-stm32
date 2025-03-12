@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  0000b258  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000e108  00000000  00000000  0000b281  2**0
+ 12 .debug_info   0000e0fe  00000000  00000000  0000b281  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000027a7  00000000  00000000  00019389  2**0
+ 13 .debug_abbrev 0000274e  00000000  00000000  0001937f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000e80  00000000  00000000  0001bb30  2**3
+ 14 .debug_aranges 00000e80  00000000  00000000  0001bad0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 00000b38  00000000  00000000  0001c9b0  2**0
+ 15 .debug_rnglists 00000b38  00000000  00000000  0001c950  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00019544  00000000  00000000  0001d4e8  2**0
+ 16 .debug_macro  00019544  00000000  00000000  0001d488  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00011491  00000000  00000000  00036a2c  2**0
+ 17 .debug_line   0001148e  00000000  00000000  000369cc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0008d539  00000000  00000000  00047ebd  2**0
+ 18 .debug_str    0008d539  00000000  00000000  00047e5a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000d53f6  2**0
+ 19 .comment      00000043  00000000  00000000  000d5393  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000050a0  00000000  00000000  000d543c  2**2
+ 20 .debug_frame  000050a0  00000000  00000000  000d53d8  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000004e  00000000  00000000  000da4dc  2**0
+ 21 .debug_line_str 0000004e  00000000  00000000  000da478  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -4772,11 +4772,7 @@ void LcdSetParam()
 	HAL_Delay(120	);
  8002756:	2078      	movs	r0, #120	@ 0x78
  8002758:	f000 fc4a 	bl	8002ff0 <HAL_Delay>
-	LcdWriteData(0x05); // 16位像素格式，rgb565
 
-	LcdWriteCmd(0x29); // 开启显示
-
-#else
 	LcdWriteCmd(0x21); 
  800275c:	2021      	movs	r0, #33	@ 0x21
  800275e:	f7ff ff39 	bl	80025d4 <LcdWriteCmd>
@@ -5014,11 +5010,9 @@ void LcdSetParam()
  8002912:	20a8      	movs	r0, #168	@ 0xa8
  8002914:	f7ff fea2 	bl	800265c <LcdWriteData>
 
-	LcdWriteCmd(0x29); 
+	LcdWriteCmd(0x29);
  8002918:	2029      	movs	r0, #41	@ 0x29
  800291a:	f7ff fe5b 	bl	80025d4 <LcdWriteCmd>
-
-#endif
 }
  800291e:	bf00      	nop
  8002920:	bd80      	pop	{r7, pc}

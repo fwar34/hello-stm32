@@ -3,6 +3,6 @@
 ../Core/Src/st7735s.c:64:6:LcdWriteDataU16	1
 ../Core/Src/st7735s.c:71:6:LcdReset	1
 ../Core/Src/st7735s.c:80:6:LcdSetParam	1
-../Core/Src/st7735s.c:269:6:LcdInit	1
-../Core/Src/st7735s.c:275:6:Lcd_SetRegion	1
-../Core/Src/st7735s.c:294:6:LcdClear	3
+../Core/Src/st7735s.c:178:6:LcdInit	1
+../Core/Src/st7735s.c:184:6:Lcd_SetRegion	1
+../Core/Src/st7735s.c:203:6:LcdClear	3
