@@ -27,6 +27,7 @@
 #include "dht11.h"
 #include "timer.h"
 #include "st7735s.h"
+#include "image.h"
 #include <string.h>
 /* USER CODE END Includes */
 
@@ -154,18 +155,54 @@ void ProcessLcd()
 {
 	static uint32_t lastTick = 0;
 	uint32_t currentTick = HAL_GetTick();
-	if (currentTick - lastTick < 1000) {
+	if (currentTick - lastTick < 300) {
 		return;
 	}
 	lastTick = currentTick;
 
-	static uint16_t color = BLACK_RGB565;
+	static uint16_t color = 0x7564;
 	LcdClear(color);
+	LcdDrawPoint(10, 70, WHITE_RGB565);
+	const Rect rect = {{50, 10}, 30, 40};
+	LcdDrawRect(&rect, BLACK_RGB565);
+	LcdDrawBlock(100, 28, 30, 30, 0xF983);
+	LcdDrawLine(0, 0, 3, WHITE_RGB565, LINE_DIR_VERTICAL);
+//	LcdDrawLine(10, 30, 25, WHITE_RGB565, LINE_DIR_HORIZONTAL);
 	if (color % 2 == 0) {
 		color += 33;
 	} else {
-		color += 11;
+		color += 55;
 	}
+
+	const Rect rect2 = {{10, 10}, 20, 20};
+	LcdDrawRect(&rect2, BLACK_RGB565);
+
+	TFT_ShowChar(0, 0, 'A', 0x7564, YELLOW, 16);
+	TFT_ShowChar(0, 16, 'B', BLUE, YELLOW, 16);
+	TFT_ShowChar(0, 32, 'C', BLUE, YELLOW, 16);
+	TFT_ShowChar(0, 48, 'D', BLUE, YELLOW, 16);
+	TFT_ShowChar(0, 64, 'E', BLUE, YELLOW, 16);
+	TFT_ShowChar(0, 80, 'F', BLUE, YELLOW, 16);
+	TFT_ShowChar(0, 96, 'G', BLUE, YELLOW, 16);
+	TFT_ShowChar(0, 112, 'H', BLUE, YELLOW, 16);
+	TFT_ShowChar(0, 128, 'I', BLUE, YELLOW, 16);
+	TFT_ShowChar(0, 144, 'J', BLUE, YELLOW, 16);
+
+	LCD_ShowCharStr(40, 32, 80, "HELLO", YELLOW, BLACK, 16);
+	LCD_ShowCharNumber(48,64,128,20,YELLOW,BLACK,12);
+	LCD_ShowCharNumber(60,64,128,22,YELLOW,BLACK,12);
+
+	TFT_ShowChar(64, 84, 'Y', BLUE, OLIVE, 32);
+
+	for(uint8_t i=32;i<80;i++)
+	{
+	  LcdDrawPoint(i, 128, PURPLE);
+	}
+	//	  LcdDrawData(IMG_DATA, 0, 0, IMG_WIDTH, IMG_HEIGHT);
+	LcdDrawRgb565(IMG_DATA, 0, 0, IMG_WIDTH, IMG_HEIGHT);
+	LcdDrawRgb565(IMG_DATA2, 80, 0, IMG_WIDTH, IMG_HEIGHT);
+
+	HAL_Delay(1000);
 }
 /* USER CODE END 0 */
 
@@ -205,14 +242,15 @@ int main(void)
 	Ec11EncoderInit();
 	TIM3_Init();
 	LcdInit();
+	//	ProcessLcd();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	while (1) {
 		ProcessKey();
-		ProcessDth11();
-		ProcessLcd();
+//		ProcessDth11();
+//		ProcessLcd();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

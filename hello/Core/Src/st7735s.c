@@ -1,6 +1,9 @@
 #include "st7735s.h"
 #include "main.h"
+#include "font.h"
 #include <stm32f1xx_hal.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #define LCD_WIDTH 160
 #define LCD_HEIGHT 80
@@ -61,6 +64,12 @@ void LcdWriteData(uint8_t data)
 	SET_LCD_CS;
 }
 
+void LcdWriteReg(uint8_t cmd, uint8_t data)
+{
+	LcdWriteCmd(cmd);
+	LcdWriteData(data);
+}
+
 void LcdWriteDataU16(uint16_t data)
 {
 	LcdWriteData(data >> 8);
@@ -78,14 +87,14 @@ void LcdReset()
 }
 
 void LcdSetParam()
- {
+{
 	LcdWriteCmd(0x11); // 退出睡眠
-	HAL_Delay(120	);
+	HAL_Delay(120);
 
-	LcdWriteCmd(0x21); 
-	LcdWriteCmd(0x21); 
+//	LcdWriteCmd(0x21);
+	LcdWriteCmd(0x21);
 
-	LcdWriteCmd(0xB1); 
+	LcdWriteCmd(0xB1);
 	LcdWriteData(0x05);
 	LcdWriteData(0x3A);
 	LcdWriteData(0x3A);
@@ -95,8 +104,8 @@ void LcdSetParam()
 	LcdWriteData(0x3A);
 	LcdWriteData(0x3A);
 
-	LcdWriteCmd(0xB3); 
-	LcdWriteData(0x05);  
+	LcdWriteCmd(0xB3);
+	LcdWriteData(0x05);
 	LcdWriteData(0x3A);
 	LcdWriteData(0x3A);
 	LcdWriteData(0x05);
@@ -120,14 +129,14 @@ void LcdSetParam()
 
 	LcdWriteCmd(0xC3);
 	LcdWriteData(0x8D);
-	LcdWriteData(0x6A);   
+	LcdWriteData(0x6A);
 
 	LcdWriteCmd(0xC4);
-	LcdWriteData(0x8D); 
-	LcdWriteData(0xEE); 
+	LcdWriteData(0x8D);
+	LcdWriteData(0xEE);
 
-	LcdWriteCmd(0xC5);  /*VCOM*/
-	LcdWriteData(0x0E);    
+	LcdWriteCmd(0xC5); /*VCOM*/
+	LcdWriteData(0x0E);
 
 	LcdWriteCmd(0xE0);
 	LcdWriteData(0x10);
@@ -165,11 +174,14 @@ void LcdSetParam()
 	LcdWriteData(0x0E);
 	LcdWriteData(0x10);
 
-	LcdWriteCmd(0x3A); 
+	LcdWriteCmd(0x3A);
 	LcdWriteData(0x05);
 
 	LcdWriteCmd(0x36);
-	LcdWriteData(0xA8);//
+//	LcdWriteData(0xA8); //
+//	LcdWriteData(0xC8); //
+	LcdWriteData(0x60);
+//	LcdWriteData(0xF0);
 
 	LcdWriteCmd(0x29);
 }
@@ -180,6 +192,7 @@ void LcdInit()
 	LcdReset();
 	LcdSetParam();
 }
+
 // 设置显示区域
 void Lcd_SetRegion(uint16_t xStart, uint16_t yStart, uint16_t xEnd, uint16_t yEnd)
 {
@@ -200,13 +213,213 @@ void Lcd_SetRegion(uint16_t xStart, uint16_t yStart, uint16_t xEnd, uint16_t yEn
 	LcdWriteCmd(0x2C); // 写入显存
 }
 
+/**
+ * startX: 矩形左上角起点X坐标
+ * startY: 矩形左上角起点Y坐标
+ * width: 矩形宽度
+ * height: 矩形高度
+ */
+void LcdDrawBlock(uint8_t xStart, uint8_t yStart, uint8_t width, uint8_t height, uint16_t color)
+{
+	uint8_t xEnd = xStart + width - 1;
+	uint8_t yEnd = yStart + height - 1;
+	uint16_t xy = 0;
+	if (width == 0 || height == 0) {
+		xy = width + height;
+	} else {
+		xy = width * height;
+	}
+
+	Lcd_SetRegion(xStart, yStart, xEnd, yEnd);
+	for (uint16_t i = 0; i < xy; i++)
+		LcdWriteDataU16(color);
+}
+
+
 void LcdClear(uint16_t color)
 {
-	Lcd_SetRegion(0, 0, LCD_WIDTH - 1, LCD_HEIGHT - 1);
-	for (uint8_t i = 0; i < LCD_WIDTH; ++i) {
-		for (uint8_t j = 0; j < LCD_HEIGHT; ++j) {
-			LcdWriteDataU16(color);
-		}
+	LcdDrawBlock(0, 0, LCD_WIDTH, LCD_HEIGHT, color);
+}
+
+void LcdDrawPoint(uint16_t x, uint16_t y, uint16_t color)
+{
+	Lcd_SetRegion(x, y, x, y);
+	LcdWriteDataU16(color);
+}
+
+/**
+ * startX: 线条起点X坐标
+ * endX: 线条起点Y坐标
+ * len: 线条像素长度
+ */
+void LcdDrawLine(uint16_t startX, uint16_t startY, uint16_t length, uint16_t color, uint8_t direction)
+{
+	if (direction == LINE_DIR_HORIZONTAL) {
+		LcdDrawBlock(startX, startY, length, 1, color);
+	} else if (direction == LINE_DIR_VERTICAL) {
+		LcdDrawBlock(startX, startY, 1, length, color);
 	}
 }
 
+void LcdDrawRect(const Rect *rect, uint16_t color)
+{
+	LcdDrawLine(rect->leftUp.x, rect->leftUp.y, rect->width, color, LINE_DIR_HORIZONTAL);
+	LcdDrawLine(rect->leftUp.x, rect->leftUp.y + rect->height - 1, rect->width, color, LINE_DIR_HORIZONTAL);
+
+	LcdDrawLine(rect->leftUp.x, rect->leftUp.y, rect->height, color, LINE_DIR_VERTICAL);
+	LcdDrawLine(rect->leftUp.x + rect->width - 1, rect->leftUp.y, rect->height, color, LINE_DIR_VERTICAL);
+}
+
+void LcdDrawCircle(const Point *center, uint16_t radius, uint16_t color)
+{
+
+}
+
+//Display ch (char type) in (x, y) with back_color, front_color and front_size. font.h is essential.
+void TFT_ShowChar(uint16_t x, uint16_t y, char ch, uint16_t back_color,
+		uint16_t font_color, uint8_t font_size) {
+	int i = 0, j = 0;
+	unsigned char temp = 0;
+	uint8_t size = 0;
+//	uint8_t t = 0;
+
+	if ((x > (LCD_WIDTH - font_size / 2)) || (y > (LCD_HEIGHT - font_size)))
+		return;
+
+	Lcd_SetRegion(x, y, x + font_size / 2 - 1, y + font_size - 1);
+
+	int16_t index = ch - ' ';
+
+	if ((font_size == 16) || (font_size == 32)) {
+		size = (font_size / 8 + ((font_size % 8) ? 1 : 0)) * (font_size / 2);
+
+		for (i = 0; i < size; i++) {
+			if (font_size == 16) {
+				temp = asc2_1608[index][i];
+			} else if (font_size == 32) {
+//				temp = asc2_3216[index][i];
+			} else {
+				return;
+			}
+
+			for (j = 0; j < 8; j++) {
+				if (temp & 0x80) {
+					LcdWriteDataU16(font_color);
+				} else {
+					LcdWriteDataU16(back_color);
+				}
+				temp <<= 1;
+			}
+		}
+	} else if (font_size == 12) {
+		size = (font_size / 8 + ((font_size % 8) ? 1 : 0)) * (font_size / 2);
+
+		for (i = 0; i < size; i++) {
+			temp = asc2_1206[index][i];
+
+			for (j = 0; j < 6; j++) {
+				if (temp & 0x80) {
+					LcdWriteDataU16(font_color);
+				} else {
+					LcdWriteDataU16(back_color);
+				}
+
+				temp <<= 1;
+			}
+		}
+	} else if (font_size == 24) {
+//		size = (font_size * 16) / 8;
+//
+//		for (i = 0; i < size; i++) {
+//			temp = asc2_2412[index][i];
+//			if (i % 2 == 0)
+//				t = 8;
+//			else
+//				t = 4;
+//			for (j = 0; j < t; j++) {
+//				if (temp & 0x80) {
+//					LcdWriteDataU16(font_color);
+//				} else {
+//					LcdWriteDataU16(back_color);
+//				}
+//
+//				temp <<= 1;
+//			}
+//		}
+	} else
+		return;
+}
+
+//Display str (string type) in (x, y) with back_color, front_color and front_size under max_width. font.h is essential.
+void LCD_ShowCharStr(uint16_t x, uint16_t y, uint32_t max_width, char *str,
+		uint16_t back_color, uint16_t font_color, uint8_t font_size) {
+
+	max_width += x;
+
+	while ((*str <= '~') && (*str >= ' ')) {
+		if (x >= max_width) {
+			break;
+		}
+
+		TFT_ShowChar(x, y, *str, back_color, font_color, font_size);
+		x += font_size / 2;
+		str++;
+	}
+}
+
+//Display number (byte type) in (x, y) with back_color, front_color and front_size under max_width. font.h is essential.
+void LCD_ShowCharNumber(uint16_t x, uint16_t y, uint32_t max_width,
+		uint8_t number, uint16_t back_color, uint16_t font_color,
+		uint8_t font_size) {
+	char number_ascii[10];
+
+	sprintf(number_ascii, "%d", number);
+
+	LCD_ShowCharStr(x, y, max_width, number_ascii, back_color, font_color,
+			font_size);
+}
+
+/*************************************************
+函数名：f_Lcd_ShowBmp_ColorValue
+功能：指定位置显示图片
+入口参数：
+	pbmp 	: 图片数组指针(像素点字节颜色值，高字节在前)
+	x0	 	: 图片显示起点x坐标
+	y0	 	: 图片显示起点y坐标
+	x_Len	: 图片宽度
+	y_Len	: 图片高度
+返回值：无
+*************************************************/
+void LcdShowBmp(const uint8_t *pbmp, uint8_t x0, uint8_t y0, uint8_t x_Len,
+		uint8_t y_Len) {
+	uint8_t x1 = x0 + x_Len - 1;
+	uint8_t y1 = y0 + y_Len - 1;
+	uint16_t xy = (x_Len * y_Len) << 1;
+	uint16_t i = 0;
+
+	Lcd_SetRegion(x0, y0, x1, y1);
+	LcdWriteCmd(0x2C);
+
+	for (i = 0; (i << 1) < xy; i++)
+		LcdWriteDataU16((pbmp[i << 1] << 8) + pbmp[(i << 1) + 1]);
+}
+
+void LcdDrawRgb565(const uint16_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height)
+{
+	uint16_t xEnd = xStart + width - 1;
+	uint16_t yEnd = yStart + height - 1;
+	Lcd_SetRegion(xStart, yStart, xEnd, yEnd);
+	for (uint16_t i = 0; i < width * height; i++) {
+		LcdWriteDataU16(rgb565[i]);
+	}
+}
+
+void LcdDrawData(const uint8_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height)
+{
+	uint16_t xEnd = xStart + width - 1;
+	uint16_t yEnd = yStart + height - 1;
+	Lcd_SetRegion(xStart, yStart, xEnd, yEnd);
+	for (uint16_t i = 0; i < width * height * 2; i++) {
+		LcdWriteData(rgb565[i]);
+	}
+}
