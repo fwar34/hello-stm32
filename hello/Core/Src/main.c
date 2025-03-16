@@ -198,11 +198,14 @@ void ProcessLcd()
 	{
 	  LcdDrawPoint(i, 128, PURPLE);
 	}
-	//	  LcdDrawData(IMG_DATA, 0, 0, IMG_WIDTH, IMG_HEIGHT);
-	LcdDrawRgb565(IMG_DATA, 0, 0, IMG_WIDTH, IMG_HEIGHT);
-	LcdDrawRgb565(IMG_DATA2, 80, 0, IMG_WIDTH, IMG_HEIGHT);
 
-	HAL_Delay(1000);
+	// 图像rgb565数组使用utils目录下"image2rgb565scale.py 图片文件 宽 高"命令生成，
+	// 可以不指定宽或者高，脚本自动按照图片原始的宽高比计算新的值
+	LcdDrawRgb565(IMG_DATA, 0, 0, IMG_WIDTH, IMG_HEIGHT);
+	LcdDrawRgb565(IMG_DATA2, 60, 0, 100, 56);
+	//	  LcdDrawData(IMG_DATA, 0, 0, IMG_WIDTH, IMG_HEIGHT);
+
+//	HAL_Delay(17);
 }
 /* USER CODE END 0 */
 
@@ -249,8 +252,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1) {
 		ProcessKey();
-//		ProcessDth11();
-//		ProcessLcd();
+		ProcessDth11();
+		ProcessLcd();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
