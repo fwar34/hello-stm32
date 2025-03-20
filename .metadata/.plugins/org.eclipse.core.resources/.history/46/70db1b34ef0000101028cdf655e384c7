@@ -1,0 +1,254 @@
+#include "st7735s.h"
+#include "main.h"
+#include <stm32f1xx_hal.h>
+
+#define LCD_WIDTH 160
+#define LCD_HEIGHT 80
+
+#define CLR_LCD_CS HAL_GPIO_WritePin(spi_cs_GPIO_Port, spi_cs_Pin, GPIO_PIN_RESET)
+#define SET_LCD_CS HAL_GPIO_WritePin(spi_cs_GPIO_Port, spi_cs_Pin, GPIO_PIN_SET)
+
+#define CLR_LCD_DC HAL_GPIO_WritePin(spi_dc_GPIO_Port, spi_dc_Pin, GPIO_PIN_RESET)
+#define SET_LCD_DC HAL_GPIO_WritePin(spi_dc_GPIO_Port, spi_dc_Pin, GPIO_PIN_SET)
+
+#define CLR_LCD_MOSI HAL_GPIO_WritePin(spi_mosi_GPIO_Port, spi_mosi_Pin, GPIO_PIN_RESET)
+#define SET_LCD_MOSI HAL_GPIO_WritePin(spi_mosi_GPIO_Port, spi_mosi_Pin, GPIO_PIN_SET)
+
+#define CLR_LCD_SCL HAL_GPIO_WritePin(spi_scl_GPIO_Port, spi_scl_Pin, GPIO_PIN_RESET)
+#define SET_LCD_SCL HAL_GPIO_WritePin(spi_scl_GPIO_Port, spi_scl_Pin, GPIO_PIN_SET)
+
+#define CLR_LCD_RES HAL_GPIO_WritePin(spi_res_GPIO_Port, spi_res_Pin, GPIO_PIN_RESET)
+#define SET_LCD_RES HAL_GPIO_WritePin(spi_res_GPIO_Port, spi_res_Pin, GPIO_PIN_SET)
+
+// 写命令 dcx = 0
+void LcdWriteCmd(uint8_t data)
+{
+	CLR_LCD_CS;
+	CLR_LCD_DC;
+
+	for (uint8_t i = 0; i < 8; ++i) {
+		if (data & 0x80) {
+			SET_LCD_MOSI;
+		} else {
+			CLR_LCD_MOSI;
+		}
+		CLR_LCD_SCL;
+		SET_LCD_SCL;
+		data = data << 1;
+	}
+
+	SET_LCD_CS;
+}
+
+// 写数据 dcx = 1
+void LcdWriteData(uint8_t data)
+{
+	CLR_LCD_CS;
+	SET_LCD_DC;
+
+	for (uint8_t i = 0; i < 8; ++i) {
+		if (data & 0x80) {
+			SET_LCD_MOSI;
+		} else {
+			CLR_LCD_MOSI;
+		}
+
+		CLR_LCD_SCL;
+		SET_LCD_SCL;
+		data = data << 1;
+	}
+
+	SET_LCD_CS;
+}
+
+void LcdWriteDataU16(uint16_t data)
+{
+	LcdWriteData(data >> 8);
+	LcdWriteData(data & 0xFF);
+}
+
+// res低电平>5us,这里使用1ms，最长复位时间120ms
+void LcdReset()
+{
+	SET_LCD_RES;
+	CLR_LCD_RES;
+	HAL_Delay(100);
+	SET_LCD_RES;
+	HAL_Delay(120);
+}
+
+void LcdSetParam()
+{
+	LcdWriteCmd(0x11); // 退出睡眠
+	HAL_Delay(120);
+
+	LcdWriteCmd(0x21);
+	LcdWriteCmd(0x21);
+
+	LcdWriteCmd(0xB1);
+	LcdWriteData(0x05);
+	LcdWriteData(0x3A);
+	LcdWriteData(0x3A);
+
+	LcdWriteCmd(0xB2);
+	LcdWriteData(0x05);
+	LcdWriteData(0x3A);
+	LcdWriteData(0x3A);
+
+	LcdWriteCmd(0xB3);
+	LcdWriteData(0x05);
+	LcdWriteData(0x3A);
+	LcdWriteData(0x3A);
+	LcdWriteData(0x05);
+	LcdWriteData(0x3A);
+	LcdWriteData(0x3A);
+
+	LcdWriteCmd(0xB4);
+	LcdWriteData(0x03);
+
+	LcdWriteCmd(0xC0);
+	LcdWriteData(0x62);
+	LcdWriteData(0x02);
+	LcdWriteData(0x04);
+
+	LcdWriteCmd(0xC1);
+	LcdWriteData(0xC0);
+
+	LcdWriteCmd(0xC2);
+	LcdWriteData(0x0D);
+	LcdWriteData(0x00);
+
+	LcdWriteCmd(0xC3);
+	LcdWriteData(0x8D);
+	LcdWriteData(0x6A);
+
+	LcdWriteCmd(0xC4);
+	LcdWriteData(0x8D);
+	LcdWriteData(0xEE);
+
+	LcdWriteCmd(0xC5); /*VCOM*/
+	LcdWriteData(0x0E);
+
+	LcdWriteCmd(0xE0);
+	LcdWriteData(0x10);
+	LcdWriteData(0x0E);
+	LcdWriteData(0x02);
+	LcdWriteData(0x03);
+	LcdWriteData(0x0E);
+	LcdWriteData(0x07);
+	LcdWriteData(0x02);
+	LcdWriteData(0x07);
+	LcdWriteData(0x0A);
+	LcdWriteData(0x12);
+	LcdWriteData(0x27);
+	LcdWriteData(0x37);
+	LcdWriteData(0x00);
+	LcdWriteData(0x0D);
+	LcdWriteData(0x0E);
+	LcdWriteData(0x10);
+
+	LcdWriteCmd(0xE1);
+	LcdWriteData(0x10);
+	LcdWriteData(0x0E);
+	LcdWriteData(0x03);
+	LcdWriteData(0x03);
+	LcdWriteData(0x0F);
+	LcdWriteData(0x06);
+	LcdWriteData(0x02);
+	LcdWriteData(0x08);
+	LcdWriteData(0x0A);
+	LcdWriteData(0x13);
+	LcdWriteData(0x26);
+	LcdWriteData(0x36);
+	LcdWriteData(0x00);
+	LcdWriteData(0x0D);
+	LcdWriteData(0x0E);
+	LcdWriteData(0x10);
+
+	LcdWriteCmd(0x3A);
+	LcdWriteData(0x05);
+
+	LcdWriteCmd(0x36);
+//	LcdWriteData(0xA8); //
+//	LcdWriteData(0xC8); //
+	LcdWriteData(0x60);
+//	LcdWriteData(0xF0);
+
+	LcdWriteCmd(0x29);
+}
+
+
+void LcdInit()
+{
+	LcdReset();
+	LcdSetParam();
+}
+// 设置显示区域
+void Lcd_SetRegion(uint16_t xStart, uint16_t yStart, uint16_t xEnd, uint16_t yEnd)
+{
+#if 0
+	// 列地址设置
+	LcdWriteCmd(0x2A);
+	LcdWriteData(xStart >> 8);
+	LcdWriteData(xStart + 1);
+	LcdWriteData(xEnd >> 8);
+	LcdWriteData(xEnd + 1);
+
+	// 行地址设置
+	LcdWriteCmd(0x2B);
+	LcdWriteData(yStart >> 8);
+	LcdWriteData(yStart + 0x1A);
+	LcdWriteData(yEnd >> 8);
+	LcdWriteData(yEnd + 0x1A);
+#else
+	// 列地址设置
+	LcdWriteCmd(0x2A);
+	LcdWriteData(xStart >> 8);
+	LcdWriteData(xStart + 1);
+	LcdWriteData(xEnd >> 8);
+	LcdWriteData(xEnd + 1);
+
+	// 行地址设置
+	LcdWriteCmd(0x2B);
+	LcdWriteData(yStart >> 8);
+	LcdWriteData(yStart + 0x1A);
+	LcdWriteData(yEnd >> 8);
+	LcdWriteData(yEnd + 0x1A);
+#endif
+
+	LcdWriteCmd(0x2C); // 写入显存
+}
+
+void LcdClear(uint16_t color)
+{
+	Lcd_SetRegion(0, 0, LCD_WIDTH - 1, LCD_HEIGHT - 1);
+	for (uint8_t i = 0; i < LCD_WIDTH; ++i) {
+		for (uint8_t j = 0; j < LCD_HEIGHT; ++j) {
+			LcdWriteDataU16(color);
+		}
+	}
+}
+
+void LcdDrawPoint(uint16_t x, uint16_t y, uint16_t color)
+{
+	Lcd_SetRegion(x, y, x, y);
+	LcdWriteDataU16(color);
+}
+
+void LcdDrawRect(const Rect *rect, uint16_t color)
+{
+	for (uint16_t i = 0; i < rect->width; ++i) {
+		LcdDrawPoint(rect->leftUp->x + i, rect->leftUp->y, color);
+		LcdDrawPoint(rect->leftUp->x + rect->height + i, rect->leftUp->y + rect->height, color);
+	}
+
+	for (uint16_t i = 0; i < rect->height; ++i) {
+		LcdDrawPoint(rect->leftUp->x, rect->leftUp->y + i, color);
+		LcdDrawPoint(rect->leftUp->x + rect->width, rect->leftUp->y + rect->width + i, color);
+	}
+}
+
+void LcdDrawCircle(const Point *center, uint16_t radius, uint16_t color)
+{
+
+}

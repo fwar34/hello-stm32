@@ -1,0 +1,19 @@
+/*
+ * misc_task.c
+ *
+ *  Created on: Mar 16, 2025
+ *      Author: fwar3
+ */
+
+
+#include "misc_task.h"
+#include "stm32f1xx_hal.h"
+#include "main.h"
+
+void MiscTask(pvParameters)
+{
+	while (1) {
+		HAL_GPIO_TogglePin(led2_GPIO_Port, led2_Pin);
+		vTaskDelay(1000);
+	}
+}

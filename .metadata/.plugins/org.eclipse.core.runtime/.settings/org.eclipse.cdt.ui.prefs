@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+org.eclipse.cdt.ui.text.templates.custom=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
 scalability.detect=false
 scalability.reconciler=false
 sourceHoverBackgroundColor=255,255,225

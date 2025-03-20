@@ -1,0 +1,2 @@
+2025-03-18 00:22:05,202 [ERROR] AdobePublisher:162 - Exception while opening the connection: java.net.SocketTimeoutException: Read timed out
+2025-03-18 00:22:07,213 [ERROR] AdobePublisher:162 - Exception while opening the connection: java.net.SocketTimeoutException: Read timed out

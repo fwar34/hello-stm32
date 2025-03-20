@@ -1,0 +1,120 @@
+2025-03-13 00:29:05,667 [INFO] Gpio:277 - dependency for GPIO [RCC, SYS, USART2]
+2025-03-13 00:30:33,013 [INFO] WebApp:190 - Connection lost
+2025-03-13 00:33:13,021 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-13 00:33:15,023 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-13 00:33:17,024 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-13 00:33:19,053 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-13 00:33:21,055 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-13 00:33:23,057 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-13 00:35:45,455 [INFO] WebApp:187 - Connection restablished
+2025-03-13 01:00:45,602 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 658767928 Bytes (832569344)
+2025-03-13 01:00:45,716 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 669251024 Bytes (832569344)
+2025-03-13 01:00:46,900 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 352056800 Bytes (832569344)
+2025-03-13 01:00:47,553 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: NVIC
+2025-03-13 01:00:47,554 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: USART
+2025-03-13 01:00:47,554 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: TIM1_8F1
+2025-03-13 01:00:47,554 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SYS
+2025-03-13 01:00:47,554 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: GPIO
+2025-03-13 01:00:47,554 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: RCC
+2025-03-13 01:00:47,556 [INFO] CodeGenerator:896 - code generatio: config db path: E:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.13.0.202411220809\\db\
+2025-03-13 01:00:47,647 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\license.tmp_save
+2025-03-13 01:00:48,003 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\license.tmp
+2025-03-13 01:00:48,038 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\gpio.tmp_save
+2025-03-13 01:00:48,203 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\gpio.tmp
+2025-03-13 01:00:48,403 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_it.c_save
+2025-03-13 01:00:48,689 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_it.c
+2025-03-13 01:00:48,694 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_it.h_save
+2025-03-13 01:00:48,824 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_it.h
+2025-03-13 01:00:48,833 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_hal_msp.c_save
+2025-03-13 01:00:49,018 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_hal_msp.c
+2025-03-13 01:00:49,021 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\system.tmp_save
+2025-03-13 01:00:49,100 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\system.tmp
+2025-03-13 01:00:49,108 [INFO] CodeEngine:311 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_hal_conf.h_save
+2025-03-13 01:00:49,181 [INFO] CodeEngine:335 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_hal_conf.h
+2025-03-13 01:00:49,198 [WARN] IPConfigManager:3618 - IP not found : TIM
+2025-03-13 01:00:49,199 [WARN] CodeGenerator:4152 - IP not found : null
+2025-03-13 01:00:49,205 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Inc\main.h_save
+2025-03-13 01:00:49,317 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Inc\main.h
+2025-03-13 01:00:49,321 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Src\main.c_save
+2025-03-13 01:00:49,437 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Src\main.c
+2025-03-13 01:00:49,894 [INFO] ProjectBuilder:3289 - Time for Copy HAL[1] : 182mS.
+2025-03-13 01:00:49,898 [INFO] ProjectBuilder:4876 - Project Generator version: 4.5.0-RC5
+2025-03-13 01:00:49,982 [INFO] ConfigFileManager:1579 - The Die is : DIE410
+2025-03-13 01:00:50,871 [INFO] ProjectBuilder:5154 - Time for Generating toolchain IDE Files: 973mS.
+2025-03-13 01:00:50,874 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.
+2025-03-13 01:00:50,879 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.
+2025-03-13 01:01:31,954 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 633386896 Bytes (832569344)
+2025-03-13 01:01:32,054 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 643872656 Bytes (832569344)
+2025-03-13 01:01:33,165 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 336728384 Bytes (832569344)
+2025-03-13 01:01:33,765 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: NVIC
+2025-03-13 01:01:33,765 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: USART
+2025-03-13 01:01:33,765 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: TIM1_8F1
+2025-03-13 01:01:33,765 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SYS
+2025-03-13 01:01:33,766 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: GPIO
+2025-03-13 01:01:33,766 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: RCC
+2025-03-13 01:01:33,768 [INFO] CodeGenerator:896 - code generatio: config db path: E:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.13.0.202411220809\\db\
+2025-03-13 01:01:33,835 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\license.tmp_save
+2025-03-13 01:01:33,889 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\license.tmp
+2025-03-13 01:01:33,908 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\gpio.tmp_save
+2025-03-13 01:01:34,085 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\gpio.tmp
+2025-03-13 01:01:34,189 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_it.c_save
+2025-03-13 01:01:34,270 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_it.c
+2025-03-13 01:01:34,275 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_it.h_save
+2025-03-13 01:01:34,338 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_it.h
+2025-03-13 01:01:34,348 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_hal_msp.c_save
+2025-03-13 01:01:34,439 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_hal_msp.c
+2025-03-13 01:01:34,443 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\system.tmp_save
+2025-03-13 01:01:34,503 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\system.tmp
+2025-03-13 01:01:34,512 [INFO] CodeEngine:311 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_hal_conf.h_save
+2025-03-13 01:01:34,582 [INFO] CodeEngine:335 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_hal_conf.h
+2025-03-13 01:01:34,598 [WARN] IPConfigManager:3618 - IP not found : TIM
+2025-03-13 01:01:34,598 [WARN] CodeGenerator:4152 - IP not found : null
+2025-03-13 01:01:34,605 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Inc\main.h_save
+2025-03-13 01:01:34,674 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Inc\main.h
+2025-03-13 01:01:34,679 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Src\main.c_save
+2025-03-13 01:01:34,784 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Src\main.c
+2025-03-13 01:01:35,066 [INFO] ProjectBuilder:3289 - Time for Copy HAL[1] : 104mS.
+2025-03-13 01:01:35,068 [INFO] ProjectBuilder:4876 - Project Generator version: 4.5.0-RC5
+2025-03-13 01:01:35,148 [INFO] ConfigFileManager:1579 - The Die is : DIE410
+2025-03-13 01:01:35,979 [INFO] ProjectBuilder:5154 - Time for Generating toolchain IDE Files: 910mS.
+2025-03-13 01:01:35,979 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 0mS.
+2025-03-13 01:01:35,989 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 1mS.
+2025-03-13 01:02:22,950 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 299074336 Bytes (832569344)
+2025-03-13 01:02:23,049 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 308511520 Bytes (832569344)
+2025-03-13 01:02:24,109 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 464223008 Bytes (832569344)
+2025-03-13 01:02:24,734 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: NVIC
+2025-03-13 01:02:24,734 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: USART
+2025-03-13 01:02:24,734 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: TIM1_8F1
+2025-03-13 01:02:24,734 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: SYS
+2025-03-13 01:02:24,734 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: GPIO
+2025-03-13 01:02:24,734 [INFO] BlockDiagram:2766 - set Specific Code input for plugin: RCC
+2025-03-13 01:02:24,736 [INFO] CodeGenerator:896 - code generatio: config db path: E:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.common.mx_6.13.0.202411220809\\db\
+2025-03-13 01:02:24,806 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\license.tmp_save
+2025-03-13 01:02:24,867 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\license.tmp
+2025-03-13 01:02:24,888 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\gpio.tmp_save
+2025-03-13 01:02:24,952 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\gpio.tmp
+2025-03-13 01:02:25,018 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_it.c_save
+2025-03-13 01:02:25,102 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_it.c
+2025-03-13 01:02:25,105 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_it.h_save
+2025-03-13 01:02:25,168 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_it.h
+2025-03-13 01:02:25,178 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_hal_msp.c_save
+2025-03-13 01:02:25,255 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Src\stm32f1xx_hal_msp.c
+2025-03-13 01:02:25,258 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\system.tmp_save
+2025-03-13 01:02:25,308 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\MXTmpFiles\system.tmp
+2025-03-13 01:02:25,315 [INFO] CodeEngine:311 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_hal_conf.h_save
+2025-03-13 01:02:25,377 [INFO] CodeEngine:335 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Inc\stm32f1xx_hal_conf.h
+2025-03-13 01:02:25,386 [WARN] IPConfigManager:3618 - IP not found : TIM
+2025-03-13 01:02:25,386 [WARN] CodeGenerator:4152 - IP not found : null
+2025-03-13 01:02:25,392 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Inc\main.h_save
+2025-03-13 01:02:25,445 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Inc\main.h
+2025-03-13 01:02:25,448 [INFO] CodeEngine:255 - oldGeneratedFile, E:\STM32CubeIDE_Workspace\hello\Core\Src\main.c_save
+2025-03-13 01:02:25,530 [INFO] CodeEngine:279 - Generated code: E:\STM32CubeIDE_Workspace\hello\Core\Src\main.c
+2025-03-13 01:02:25,861 [INFO] ProjectBuilder:3289 - Time for Copy HAL[1] : 139mS.
+2025-03-13 01:02:25,863 [INFO] ProjectBuilder:4876 - Project Generator version: 4.5.0-RC5
+2025-03-13 01:02:25,935 [INFO] ConfigFileManager:1579 - The Die is : DIE410
+2025-03-13 01:02:26,594 [INFO] ProjectBuilder:5154 - Time for Generating toolchain IDE Files: 731mS.
+2025-03-13 01:02:26,595 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 1mS.
+2025-03-13 01:02:26,597 [INFO] ProjectBuilder:3146 - Time for Copy CMSIS : 1mS.
+2025-03-13 01:07:09,196 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-13 01:08:16,056 [ERROR] AdobePublisher:162 - Exception while opening the connection: java.net.SocketTimeoutException: Read timed out
+2025-03-13 01:10:21,265 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 

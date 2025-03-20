@@ -1,17 +1,21 @@
-22:59:46 **** Incremental Build of configuration Debug for project hello ****
+19:46:19 **** Build of configuration Debug for project hello ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/ec11.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/ec11.d" -MT"Core/Src/ec11.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/ec11.o"
-arm-none-eabi-gcc -o "hello.elf" @"objects.list"   -mcpu=cortex-m3 -T"E:\STM32CubeIDE_Workspace\hello\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="hello.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: hello.elf
- 
-arm-none-eabi-size  hello.elf 
-arm-none-eabi-objdump -h -S hello.elf  > "hello.list"
-   text	   data	    bss	    dec	    hex	filename
-  16596	    208	   2432	  19236	   4b24	hello.elf
-Finished building: default.size.stdout
- 
-Finished building: hello.list
- 
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o"
+arm-none-eabi-gcc "../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.d" -MT"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o"
+e:/st/stm32cubeide_1.17.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.make.win32_2.2.0.202409170845/tools/bin/sh: arm-none-eabi-gcc: Permission denied
+arm-none-eabi-gcc: fatal error: cannot execute 'E:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.1.0.202410251130/tools/bin/../lib/gcc/arm-none-eabi/12.3.1/cc1.exe': CreateProcess: No such file or directory
+compilation terminated.
+process_begin: CreateProcessW(E:\ST\STM32CubeIDE_1.17.0\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.make.win32_2.2.0.202409170845\tools\bin\sh.exe, E:/ST/STM32CubeIDE_1.17.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.make.win32_2.2.0.202409170845/tools/bin/sh.exe -c "arm-none-eabi-gcc \"../Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.c\" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF\"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.d\" -MT\"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o\" --specs=nano.specs -mfloat-abi=soft -mthumb -o \"Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o\"", ...) failed.
+make (e=5): �ܾ����ʡ�
+make: *** [Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk:61: Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o] Error 5
+make: *** Waiting for unfinished jobs....
+make: *** [Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk:61: Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o] Error 1
+make: *** [Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk:61: Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o] Error 126
+e:/st/stm32cubeide_1.17.0/stm32cubeide/plugins/com.st.stm32cube.ide.mcu.externaltools.make.win32_2.2.0.202409170845/tools/bin/sh: arm-none-eabi-gcc: Permission denied
+make: *** [Drivers/STM32F1xx_HAL_Driver/Src/subdir.mk:61: Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o] Error 126
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
 
-22:59:47 Build Finished. 0 errors, 0 warnings. (took 1s.344ms)
+19:46:20 Build Failed. 5 errors, 0 warnings. (took 1s.911ms)
 

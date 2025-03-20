@@ -1,6 +1,0 @@
-
-typedef struct {
-	uint8_t keyIndex;
-	uint8_t keyState;
-	uint32_t encodeCounter;
-} KeyInfo;

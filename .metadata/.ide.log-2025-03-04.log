@@ -1,0 +1,8 @@
+2025-03-04 21:50:14,228 [ERROR] ConfigurationRetriever:142 - IOException on connection: Connect timed out
+2025-03-04 21:58:07,629 [ERROR] AdobePublisher:162 - Exception while opening the connection: java.net.SocketTimeoutException: Read timed out
+2025-03-04 22:28:07,416 [ERROR] AdobePublisher:162 - Exception while opening the connection: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2025-03-04 22:28:07,517 [ERROR] AdobePublisher:162 - Exception while opening the connection: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2025-03-04 22:28:07,622 [ERROR] AdobePublisher:162 - Exception while opening the connection: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2025-03-04 22:28:08,748 [ERROR] AdobePublisher:162 - Exception while opening the connection: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2025-03-04 22:28:08,853 [ERROR] AdobePublisher:162 - Exception while opening the connection: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake
+2025-03-04 23:06:06,620 [ERROR] LogOutputStream:75 - [STDERR_REDIRECT] 
