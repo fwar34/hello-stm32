@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "stdio.h"
+#include <stdio.h>
 #include "key.h"
 #include "ec11.h"
 #include "dht11.h"
@@ -48,6 +48,8 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+SPI_HandleTypeDef hspi2;
+
 TIM_HandleTypeDef htim4;
 
 UART_HandleTypeDef huart2;
@@ -75,6 +77,7 @@ void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_USART2_UART_Init(void);
+static void MX_SPI2_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -160,7 +163,7 @@ void ProcessLcd()
 	}
 	lastTick = currentTick;
 
-	static uint16_t color = 0x7564;
+	uint16_t color = 0x7564;
 	LcdClear(color);
 	LcdDrawPoint(10, 70, WHITE_RGB565);
 	const Rect rect = {{50, 10}, 30, 40};
@@ -201,9 +204,8 @@ void ProcessLcd()
 
 	// 图像rgb565数组使用utils目录下"image2rgb565scale.py 图片文件 宽 高"命令生成，
 	// 可以不指定宽或者高，脚本自动按照图片原始的宽高比计算新的值
-	LcdDrawRgb565(IMG_DATA, 0, 0, IMG_WIDTH, IMG_HEIGHT);
-	LcdDrawRgb565(IMG_DATA2, 60, 0, 100, 56);
-	//	  LcdDrawData(IMG_DATA, 0, 0, IMG_WIDTH, IMG_HEIGHT);
+	LcdDrawData(IMG_DATA, 0, 0, IMG_WIDTH, IMG_HEIGHT);
+//	LcdDrawRgb565(IMG_DATA, 60, 0, IMG_WIDTH, IMG_HEIGHT);
 
 //	HAL_Delay(17);
 }
@@ -240,11 +242,13 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM4_Init();
   MX_USART2_UART_Init();
+  MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
 	HAL_TIM_Base_Start_IT(&htim4);
 	Ec11EncoderInit();
 	TIM3_Init();
 	LcdInit();
+//	LcdClear(0x7564);
 	//	ProcessLcd();
   /* USER CODE END 2 */
 
@@ -298,6 +302,44 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief SPI2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_SPI2_Init(void)
+{
+
+  /* USER CODE BEGIN SPI2_Init 0 */
+
+  /* USER CODE END SPI2_Init 0 */
+
+  /* USER CODE BEGIN SPI2_Init 1 */
+
+  /* USER CODE END SPI2_Init 1 */
+  /* SPI2 parameter configuration*/
+  hspi2.Instance = SPI2;
+  hspi2.Init.Mode = SPI_MODE_MASTER;
+  hspi2.Init.Direction = SPI_DIRECTION_2LINES;
+  hspi2.Init.DataSize = SPI_DATASIZE_16BIT;
+  hspi2.Init.CLKPolarity = SPI_POLARITY_LOW;
+  hspi2.Init.CLKPhase = SPI_PHASE_1EDGE;
+  hspi2.Init.NSS = SPI_NSS_SOFT;
+  hspi2.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_2;
+  hspi2.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  hspi2.Init.TIMode = SPI_TIMODE_DISABLE;
+  hspi2.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+  hspi2.Init.CRCPolynomial = 10;
+  if (HAL_SPI_Init(&hspi2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN SPI2_Init 2 */
+
+  /* USER CODE END SPI2_Init 2 */
+
 }
 
 /**
@@ -399,10 +441,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(Led0_GPIO_Port, Led0_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(spi_scl_GPIO_Port, spi_scl_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(spi_mosi_GPIO_Port, spi_mosi_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(testIO_GPIO_Port, testIO_Pin, GPIO_PIN_RESET);
@@ -423,8 +465,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   HAL_GPIO_Init(Key0_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : spi_scl_Pin spi_mosi_Pin */
-  GPIO_InitStruct.Pin = spi_scl_Pin|spi_mosi_Pin;
+  /*Configure GPIO pins : PA5 PA7 */
+  GPIO_InitStruct.Pin = GPIO_PIN_5|GPIO_PIN_7;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;

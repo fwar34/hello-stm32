@@ -68,5 +68,6 @@ void LCD_ShowCharNumber(uint16_t x, uint16_t y, uint32_t max_width,
 void LcdShowBmp(const uint8_t *pbmp, uint8_t x0, uint8_t y0, uint8_t x_Len,
 		uint8_t y_Len);
 void LcdDrawRgb565(const uint16_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height);
+void LcdDrawData(const uint8_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height);
 
 #endif /* INC_ST7735S_H_ */

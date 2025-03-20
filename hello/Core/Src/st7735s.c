@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define SPI_DMA_BUFFER_SIZE 1024
+
 #define LCD_WIDTH 160
 #define LCD_HEIGHT 80
 
@@ -14,14 +16,16 @@
 #define CLR_LCD_DC HAL_GPIO_WritePin(spi_dc_GPIO_Port, spi_dc_Pin, GPIO_PIN_RESET)
 #define SET_LCD_DC HAL_GPIO_WritePin(spi_dc_GPIO_Port, spi_dc_Pin, GPIO_PIN_SET)
 
-#define CLR_LCD_MOSI HAL_GPIO_WritePin(spi_mosi_GPIO_Port, spi_mosi_Pin, GPIO_PIN_RESET)
-#define SET_LCD_MOSI HAL_GPIO_WritePin(spi_mosi_GPIO_Port, spi_mosi_Pin, GPIO_PIN_SET)
-
-#define CLR_LCD_SCL HAL_GPIO_WritePin(spi_scl_GPIO_Port, spi_scl_Pin, GPIO_PIN_RESET)
-#define SET_LCD_SCL HAL_GPIO_WritePin(spi_scl_GPIO_Port, spi_scl_Pin, GPIO_PIN_SET)
+//#define CLR_LCD_MOSI HAL_GPIO_WritePin(, spi_mosi_Pin, GPIO_PIN_RESET)
+//#define SET_LCD_MOSI HAL_GPIO_WritePin(spi_mosi_GPIO_Port, spi_mosi_Pin, GPIO_PIN_SET)
+//
+//#define CLR_LCD_SCL HAL_GPIO_WritePin(spi_scl_GPIO_Port, spi_scl_Pin, GPIO_PIN_RESET)
+//#define SET_LCD_SCL HAL_GPIO_WritePin(spi_scl_GPIO_Port, spi_scl_Pin, GPIO_PIN_SET)
 
 #define CLR_LCD_RES HAL_GPIO_WritePin(spi_res_GPIO_Port, spi_res_Pin, GPIO_PIN_RESET)
 #define SET_LCD_RES HAL_GPIO_WritePin(spi_res_GPIO_Port, spi_res_Pin, GPIO_PIN_SET)
+
+extern SPI_HandleTypeDef hspi2;
 
 // 写命令 dcx = 0
 void LcdWriteCmd(uint8_t data)
@@ -29,16 +33,18 @@ void LcdWriteCmd(uint8_t data)
 	CLR_LCD_CS;
 	CLR_LCD_DC;
 
-	for (uint8_t i = 0; i < 8; ++i) {
-		if (data & 0x80) {
-			SET_LCD_MOSI;
-		} else {
-			CLR_LCD_MOSI;
-		}
-		CLR_LCD_SCL;
-		SET_LCD_SCL;
-		data = data << 1;
-	}
+//	for (uint8_t i = 0; i < 8; ++i) {
+//		if (data & 0x80) {
+//			SET_LCD_MOSI;
+//		} else {
+//			CLR_LCD_MOSI;
+//		}
+//		CLR_LCD_SCL;
+//		SET_LCD_SCL;
+//		data = data << 1;
+//	}
+//	HAL_SPI_Transmit_DMA(&hspi2, &data, 1);
+	HAL_SPI_Transmit(&hspi2, &data, sizeof(uint8_t), HAL_MAX_DELAY);
 
 	SET_LCD_CS;
 }
@@ -49,17 +55,19 @@ void LcdWriteData(uint8_t data)
 	CLR_LCD_CS;
 	SET_LCD_DC;
 
-	for (uint8_t i = 0; i < 8; ++i) {
-		if (data & 0x80) {
-			SET_LCD_MOSI;
-		} else {
-			CLR_LCD_MOSI;
-		}
-
-		CLR_LCD_SCL;
-		SET_LCD_SCL;
-		data = data << 1;
-	}
+//	for (uint8_t i = 0; i < 8; ++i) {
+//		if (data & 0x80) {
+//			SET_LCD_MOSI;
+//		} else {
+//			CLR_LCD_MOSI;
+//		}
+//
+//		CLR_LCD_SCL;
+//		SET_LCD_SCL;
+//		data = data << 1;
+//	}
+//	HAL_SPI_Transmit_DMA(&hspi2, &data, 1);
+	HAL_SPI_Transmit(&hspi2, &data, sizeof(uint8_t), HAL_MAX_DELAY);
 
 	SET_LCD_CS;
 }
@@ -72,8 +80,25 @@ void LcdWriteReg(uint8_t cmd, uint8_t data)
 
 void LcdWriteDataU16(uint16_t data)
 {
-	LcdWriteData(data >> 8);
-	LcdWriteData(data & 0xFF);
+//	LcdWriteData(data >> 8);
+//	LcdWriteData(data & 0xFF);
+	uint8_t tmp[2];
+	tmp[0] = data >> 8;
+	tmp[1] = data & 0xFF;
+	CLR_LCD_CS;
+	SET_LCD_DC;
+//	HAL_SPI_Transmit_DMA(&hspi2, tmp, 2);
+	HAL_SPI_Transmit(&hspi2, tmp, sizeof(tmp), HAL_MAX_DELAY);
+	SET_LCD_CS;
+}
+
+void LcdWriteDataArray(const uint8_t *array, uint16_t arrayLen)
+{
+	CLR_LCD_CS;
+	SET_LCD_DC;
+//	HAL_SPI_Transmit_DMA(&hspi2, array, arrayLen);
+	HAL_SPI_Transmit(&hspi2, array, arrayLen, HAL_MAX_DELAY);
+	SET_LCD_CS;
 }
 
 // res低电平>5us,这里使用1ms，最长复位时间120ms
@@ -419,7 +444,6 @@ void LcdDrawData(const uint8_t *rgb565, uint16_t xStart, uint16_t yStart, uint16
 	uint16_t xEnd = xStart + width - 1;
 	uint16_t yEnd = yStart + height - 1;
 	Lcd_SetRegion(xStart, yStart, xEnd, yEnd);
-	for (uint16_t i = 0; i < width * height * 2; i++) {
-		LcdWriteData(rgb565[i]);
-	}
+
+	LcdWriteDataArray(rgb565, width * height * 2);
 }

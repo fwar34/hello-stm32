@@ -1,4 +1,0 @@
-../Core/Src/spinlock.c:10:12:cas	32	static,ignoring_inline_asm
-../Core/Src/spinlock.c:28:6:try_accquire_lock	16	static
-../Core/Src/spinlock.c:32:6:accquire_spinlock	24	static
-../Core/Src/spinlock.c:43:6:release_spinlock	16	static

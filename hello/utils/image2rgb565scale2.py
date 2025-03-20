@@ -55,7 +55,7 @@ def read_image_to_rgb565_array(file_path, width, height):
         f.write("#define IMG_WIDTH " + str(width) + "\n")
         f.write("#define IMG_HEIGHT " + str(height) + "\n\n")
         f.write("// size " + str(width) + " x " + str(height) + "\n");
-        f.write("const unsigned char IMG_DATA[] = { \n ");
+        f.write("const unsigned short IMG_DATA[] = { \n ");
         rgb565_array = []
         # 遍历图像的每个像素
         for y in range(height):
@@ -66,8 +66,7 @@ def read_image_to_rgb565_array(file_path, width, height):
                 # 将 RGB 值转换为 RGB565 格式
                 rgb565 = rgb_to_rgb565(r, g, b)
                 rgb565_array.append(rgb565)
-                s += "0x{:02X},".format(rgb565 >> 8)
-                s += "0x{:02X},".format(rgb565 & 0xFF)
+                s += "0x{:04X},".format(rgb565)
             s += "  \n"
             f.write(s)
         f.write("}; \n\n")
