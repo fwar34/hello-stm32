@@ -1,0 +1,15 @@
+../Core/Src/main.c:65:6:HAL_UART_TxCpltCallback	2
+../Core/Src/main.c:72:6:send_data_safely	2
+../Core/Src/main.c:96:6:HAL_TIM_PeriodElapsedCallback	1
+../Core/Src/main.c:103:6:ProcessKey	8
+../Core/Src/main.c:148:6:ProcessDth11	2
+../Core/Src/main.c:165:6:ProcessLcd	1
+../Core/Src/main.c:233:5:main	1
+../Core/Src/main.c:290:6:SystemClock_Config	3
+../Core/Src/main.c:330:13:MX_SPI1_Init	2
+../Core/Src/main.c:368:13:MX_SPI2_Init	2
+../Core/Src/main.c:406:13:MX_TIM4_Init	4
+../Core/Src/main.c:451:13:MX_USART2_UART_Init	2
+../Core/Src/main.c:482:13:MX_DMA_Init	1
+../Core/Src/main.c:506:13:MX_GPIO_Init	1
+../Core/Src/main.c:578:6:Error_Handler	1

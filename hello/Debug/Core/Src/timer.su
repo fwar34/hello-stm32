@@ -1,0 +1,5 @@
+../Core/Src/timer.c:6:6:TIM3_Init	40	static
+../Core/Src/timer.c:43:6:delay_us	16	static,ignoring_inline_asm
+../Core/Src/timer.c:55:6:StartTimer3	8	static
+../Core/Src/timer.c:61:6:StopTimer3	8	static
+../Core/Src/timer.c:66:10:Timer3Count	4	static

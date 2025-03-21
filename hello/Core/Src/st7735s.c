@@ -27,9 +27,32 @@
 
 extern SPI_HandleTypeDef hspi2;
 
+#define SPI_LOCK() while (spiTxComplete == 0); spiTxComplete = 0;
+#define SPI_UNLOCK() spiTxComplete = 1;
+
+static uint8_t spiTxComplete = 1;
+void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
+{
+	if (hspi == &hspi2) {
+		SET_LCD_CS;
+		spiTxComplete = 1;
+	}
+}
+
+void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *hspi)
+{
+	if (hspi == &hspi2) {
+		SET_LCD_CS;
+		spiTxComplete = 1;
+		static char *message = "spi2 dma error";
+		send_data_safely(message, strlen(message));
+	}
+}
+
 // 写命令 dcx = 0
 void LcdWriteCmd(uint8_t data)
 {
+	SPI_LOCK();
 	CLR_LCD_CS;
 	CLR_LCD_DC;
 
@@ -47,11 +70,36 @@ void LcdWriteCmd(uint8_t data)
 	HAL_SPI_Transmit(&hspi2, &data, sizeof(uint8_t), HAL_MAX_DELAY);
 
 	SET_LCD_CS;
+	SPI_UNLOCK();
 }
 
 // 写数据 dcx = 1
 void LcdWriteData(uint8_t data)
 {
+	SPI_LOCK();
+	CLR_LCD_CS;
+	SET_LCD_DC;
+
+//	for (uint8_t i = 0; i < 8; ++i) {
+//		if (data & 0x80) {
+//			SET_LCD_MOSI;
+//		} else {
+//			CLR_LCD_MOSI;
+//		}
+//
+//		CLR_LCD_SCL;
+//		SET_LCD_SCL;
+//		data = data << 1;
+//	}
+	HAL_SPI_Transmit_DMA(&hspi2, &data, 1);
+//	HAL_SPI_Transmit(&hspi2, &data, sizeof(uint8_t), HAL_MAX_DELAY);
+
+//	SET_LCD_CS;
+}
+
+void LcdWriteDataSPI(uint8_t *data, uint16_t dataSize)
+{
+	SPI_LOCK();
 	CLR_LCD_CS;
 	SET_LCD_DC;
 
@@ -67,9 +115,10 @@ void LcdWriteData(uint8_t data)
 //		data = data << 1;
 //	}
 //	HAL_SPI_Transmit_DMA(&hspi2, &data, 1);
-	HAL_SPI_Transmit(&hspi2, &data, sizeof(uint8_t), HAL_MAX_DELAY);
+	HAL_SPI_Transmit(&hspi2, data, dataSize, HAL_MAX_DELAY);
 
 	SET_LCD_CS;
+	SPI_UNLOCK();
 }
 
 void LcdWriteReg(uint8_t cmd, uint8_t data)
@@ -80,6 +129,7 @@ void LcdWriteReg(uint8_t cmd, uint8_t data)
 
 void LcdWriteDataU16(uint16_t data)
 {
+	SPI_LOCK();
 //	LcdWriteData(data >> 8);
 //	LcdWriteData(data & 0xFF);
 	uint8_t tmp[2];
@@ -87,18 +137,22 @@ void LcdWriteDataU16(uint16_t data)
 	tmp[1] = data & 0xFF;
 	CLR_LCD_CS;
 	SET_LCD_DC;
-//	HAL_SPI_Transmit_DMA(&hspi2, tmp, 2);
-	HAL_SPI_Transmit(&hspi2, tmp, sizeof(tmp), HAL_MAX_DELAY);
-	SET_LCD_CS;
+	HAL_SPI_Transmit_DMA(&hspi2, tmp, 2);
+//	HAL_SPI_Transmit(&hspi2, tmp, sizeof(tmp), HAL_MAX_DELAY);
+//	SET_LCD_CS;
 }
 
 void LcdWriteDataArray(const uint8_t *array, uint16_t arrayLen)
 {
+	SPI_LOCK();
 	CLR_LCD_CS;
 	SET_LCD_DC;
-//	HAL_SPI_Transmit_DMA(&hspi2, array, arrayLen);
-	HAL_SPI_Transmit(&hspi2, array, arrayLen, HAL_MAX_DELAY);
-	SET_LCD_CS;
+	if (HAL_SPI_Transmit_DMA(&hspi2, array, arrayLen) != HAL_OK) {
+		static char *message = "LcdWriteDataArray failed!";
+		send_data_safely(message, strlen(message));
+	}
+//	HAL_SPI_Transmit(&hspi2, array, arrayLen, HAL_MAX_DELAY);
+//	SET_LCD_CS;
 }
 
 // res低电平>5us,这里使用1ms，最长复位时间120ms
@@ -223,17 +277,22 @@ void Lcd_SetRegion(uint16_t xStart, uint16_t yStart, uint16_t xEnd, uint16_t yEn
 {
 	// 列地址设置
 	LcdWriteCmd(0x2A);
-	LcdWriteData(xStart >> 8);
-	LcdWriteData(xStart + 1);
-	LcdWriteData(xEnd >> 8);
-	LcdWriteData(xEnd + 1);
+//	LcdWriteData(xStart >> 8);
+//	LcdWriteData(xStart + 1);
+//	LcdWriteData(xEnd >> 8);
+//	LcdWriteData(xEnd + 1);
+	uint8_t xRegion[4] = {xStart >> 8, xStart + 1, xEnd >> 8, xEnd + 1};
+	LcdWriteDataArray(xRegion, 4);
 
 	// 行地址设置
 	LcdWriteCmd(0x2B);
-	LcdWriteData(yStart >> 8);
-	LcdWriteData(yStart + 0x1A);
-	LcdWriteData(yEnd >> 8);
-	LcdWriteData(yEnd + 0x1A);
+//	LcdWriteData(yStart >> 8);
+//	LcdWriteData(yStart + 0x1A);
+//	LcdWriteData(yEnd >> 8);
+//	LcdWriteData(yEnd + 0x1A);
+	uint8_t yRegion[4] = {yStart >> 8, yStart + 0x1A, yEnd >> 8, yEnd + 0x1A};
+	LcdWriteDataArray(yRegion, 4);
+
 
 	LcdWriteCmd(0x2C); // 写入显存
 }
@@ -260,10 +319,21 @@ void LcdDrawBlock(uint8_t xStart, uint8_t yStart, uint8_t width, uint8_t height,
 		LcdWriteDataU16(color);
 }
 
-
 void LcdClear(uint16_t color)
 {
-	LcdDrawBlock(0, 0, LCD_WIDTH, LCD_HEIGHT, color);
+	uint16_t data[LCD_WIDTH] = {0};
+	for (int i = 0; i < LCD_WIDTH; ++i) {
+		data[i] = color;
+	}
+    for (int i = 0; i < LCD_HEIGHT; i++) {
+        LcdWriteDataSPI((uint8_t*)data, LCD_WIDTH * 2);
+    }
+}
+
+void LcdClear2(uint16_t color)
+{
+	uint16_t data[LCD_WIDTH * LCD_HEIGHT] = {0};
+	LcdWriteDataSPI((uint8_t*)data, LCD_WIDTH * LCD_HEIGHT * 2);
 }
 
 void LcdDrawPoint(uint16_t x, uint16_t y, uint16_t color)
@@ -446,4 +516,23 @@ void LcdDrawData(const uint8_t *rgb565, uint16_t xStart, uint16_t yStart, uint16
 	Lcd_SetRegion(xStart, yStart, xEnd, yEnd);
 
 	LcdWriteDataArray(rgb565, width * height * 2);
+}
+
+void LcdDrawData2(const uint8_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height)
+{
+	uint16_t xEnd = xStart + width - 1;
+	uint16_t yEnd = yStart + height - 1;
+	Lcd_SetRegion(xStart, yStart, xEnd, yEnd);
+	for (uint16_t i = 0; i < width * height * 2; i++) {
+		LcdWriteDataSPI((uint8_t*)&rgb565[i], sizeof(uint8_t));
+	}
+}
+
+void LcdDrawData3(const uint8_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height)
+{
+	uint16_t xEnd = xStart + width - 1;
+	uint16_t yEnd = yStart + height - 1;
+	Lcd_SetRegion(xStart, yStart, xEnd, yEnd);
+
+	LcdWriteDataSPI((uint8_t*)rgb565, width * height * 2);
 }

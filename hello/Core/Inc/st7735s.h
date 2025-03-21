@@ -50,6 +50,7 @@ typedef struct {
 void LcdInit();
 void LcdReset();
 void LcdClear(uint16_t color);
+void LcdClear2(uint16_t color);
 void LcdDrawBlock(uint8_t xStart, uint8_t yStart, uint8_t width, uint8_t height,
 		uint16_t color);
 void LcdDrawPoint(uint16_t x, uint16_t y, uint16_t color);
@@ -69,5 +70,7 @@ void LcdShowBmp(const uint8_t *pbmp, uint8_t x0, uint8_t y0, uint8_t x_Len,
 		uint8_t y_Len);
 void LcdDrawRgb565(const uint16_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height);
 void LcdDrawData(const uint8_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height);
+void LcdDrawData2(const uint8_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height);
+void LcdDrawData3(const uint8_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height);
 
 #endif /* INC_ST7735S_H_ */
