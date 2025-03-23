@@ -9,6 +9,7 @@
 #include "ec11.h"
 #include "usart.h"
 #include "timer3.h"
+#include "process_render.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -35,17 +36,28 @@ void ProcessKey()
 			send_data_safely(message, strlen(message));
 
 			if (keyInfo.keyIndex == EC11_KEY) {
-				if (keyInfo.keyState == EC11_KEY_PRESS) {
-
-				} else if (keyInfo.keyState == EC11_KEY_CLICK) {
+				switch (keyInfo.keyState) {
+				case EC11_KEY_PRESS:
+					break;
+				case EC11_KEY_CLICK:
 					HAL_GPIO_TogglePin(Led0_GPIO_Port, Led0_Pin);
-				} else if (keyInfo.keyState == EC11_KEY_DOUBLE_CLICK) {
+					break;
+				case EC11_KEY_DOUBLE_CLICK:
 					HAL_GPIO_TogglePin(testIO_GPIO_Port, testIO_Pin);
 					delay_us(20);
 					HAL_GPIO_TogglePin(testIO_GPIO_Port, testIO_Pin);
 					static char msg[100];
 					sprintf(msg, "%s\n", "testxxxx");
 					send_data_safely(msg, strlen(msg));
+					ImageMoveToggle();
+					break;
+				case EC11_KEY_LEFT_ROTATE:
+					ImageMoveLeft(2);
+					break;
+				case EC11_KEY_RIGHT_ROTATE:
+					ImageMoveRight(2);
+					break;
+				default:
 				}
 			}
 		}

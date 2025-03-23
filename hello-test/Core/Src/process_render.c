@@ -8,10 +8,49 @@
 #include "st7735s.h"
 #include "image.h"
 #include "stm32f1xx_hal.h"
-#include <inttypes.h>
+
+static uint8_t moveStart = 1;
+static uint16_t xStart = 0;
+static uint16_t needRefresh = 0;
+
+//uint8_t renderBuffer[2][LCD_WIDTH * LCD_HEIGHT * 2];
+
+void ImageMoveToggle()
+{
+	moveStart = !moveStart;
+}
+
+void ImageMoveLeft(uint8_t pixel)
+{
+	if (xStart == 0) {
+		return;
+	}
+
+	xStart -= pixel;
+	if (xStart > 80) {
+		xStart = 0;
+	}
+	needRefresh = 1;
+}
+
+void ImageMoveRight(uint8_t pixel)
+{
+	if (xStart >= 80) {
+		return;
+	}
+
+	xStart += pixel;
+	if (xStart > 80) {
+		xStart = 80;
+	}
+	needRefresh = 1;
+}
 
 void ProcessRender()
 {
+	if (moveStart != 1 && needRefresh == 0) {
+		return;
+	}
 	static uint32_t lastTick = 0;
 	uint32_t currentTick = HAL_GetTick();
 	if (currentTick - lastTick < 17) {
@@ -54,7 +93,6 @@ void ProcessRender()
 //
 	// 图像rgb565数组使用utils目录下"image2rgb565scale.py 图片文件 宽 高"命令生成，
 	// 可以不指定宽或者高，脚本自动按照图片原始的宽高比计算新的值
-	static uint16_t xStart = 0;
 
 	if (xStart > 0 && xStart <= 80) {
 		LcdDrawBlock(0, 0, xStart, LCD_HEIGHT, color);
@@ -66,8 +104,12 @@ void ProcessRender()
 	if (xStart >= 0 && xStart < 80) {
 		LcdDrawBlock(xStart + IMG_WIDTH, 0, LCD_WIDTH - xStart - IMG_WIDTH, LCD_HEIGHT, color);
 	}
-	xStart++;
-	xStart %= 81;
+
+	if (needRefresh != 1) {
+		xStart++;
+		xStart %= 81;
+	}
+	needRefresh = 0;
 //	color += 100;
 
 
