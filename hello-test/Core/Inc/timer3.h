@@ -5,8 +5,8 @@
  *      Author: fwar3
  */
 
-#ifndef INC_TIMER_H_
-#define INC_TIMER_H_
+#ifndef INC_TIMER3_H_
+#define INC_TIMER3_H_
 
 #include "stm32f1xx_hal.h"
 #include <inttypes.h>
@@ -17,4 +17,4 @@ void StopTimer3();
 uint32_t Timer3Count();
 void delay_us(uint32_t us);
 
-#endif /* INC_TIMER_H_ */
+#endif /* INC_TIMER3_H_ */

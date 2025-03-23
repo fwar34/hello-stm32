@@ -2,9 +2,9 @@
 #include "spinlock.h"
 #include "main.h"
 #include "stm32f1xx_hal.h"
-#include "timer.h"
 #include <string.h>
 #include <stdio.h>
+#include <timer3.h>
 
 #define START_LOW_TIME_18MS 18
 #define START_HIGH_TIME_20US 20

@@ -1,4 +1,5 @@
-#include "timer.h"
+#include "timer3.h"
+#include "main.h"
 
 static TIM_HandleTypeDef htim3;
 
