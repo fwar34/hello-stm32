@@ -138,7 +138,7 @@ void ProcessClickPressDebouncing()
 			ec11Encoder.debouncingTick = 0; // 重置去抖tick，为释放去抖准备
 
 			KeyInfo keyInfo = { EC11_KEY, EC11_KEY_PRESS, 0 };
-			WriteBuf(&ec11Encoder.keyCircleBuf, &keyInfo);
+			WriteBuf(&ec11Encoder.keyCircleBuf, keyInfo);
 		} else {
 			Ec11ResetStateMachine();
 		}
@@ -177,7 +177,7 @@ void ProcessClickRelease()
 		ec11Encoder.lastPressTick = 0;
 	} else if (resetLevelTick > KEY_LONG_CLICK_TIME_700MS) { // 长按
 		keyInfo.keyState = EC11_KEY_LONG_CLICK;
-		WriteBuf(&ec11Encoder.keyCircleBuf, &keyInfo);
+		WriteBuf(&ec11Encoder.keyCircleBuf, keyInfo);
 		Ec11ResetStateMachine();
 	}
 }
@@ -191,7 +191,7 @@ void ProcessDoubleClickPress()
 	if (currKeyLevel == GPIO_PIN_SET && resetLevelTick >= KEY_DOUBLE_TIME_200MS) {
 		if (ec11Encoder.lastClickTick != 0) { // 双击阈值内没有双击，则发送上次的单击事件
 			KeyInfo keyInfo = { EC11_KEY, EC11_KEY_CLICK, 0 };
-			WriteBuf(&ec11Encoder.keyCircleBuf, &keyInfo);
+			WriteBuf(&ec11Encoder.keyCircleBuf, keyInfo);
 		}
 		ec11Encoder.ec11StateMachine.currentState = EC11_KEY_CLICK;
 		ec11Encoder.ec11StateMachine.currentStep = KEY_STEP_PRESS;
@@ -247,7 +247,7 @@ void ProcessDoubleClickRelease()
 //	if (currTick - ec11Encoder.lastPressTick > KEY_LONG_CLICK_TIME_700MS) {
 //		keyInfo.keyState = EC11_KEY_LONG_CLICK;  // 单击+双击阈值内长按识别为长按
 //	}
-	WriteBuf(&ec11Encoder.keyCircleBuf, &keyInfo);
+	WriteBuf(&ec11Encoder.keyCircleBuf, keyInfo);
 	Ec11ResetStateMachine();
 }
 
@@ -281,7 +281,7 @@ static void Ec11TickProcess() {
 						ec11Encoder.hasRotate = true;
 						keyInfo.keyState = EC11_KEY_PRESS_LEFT_ROTATE;
 					}
-					WriteBuf(&ec11Encoder.keyCircleBuf, &keyInfo);
+					WriteBuf(&ec11Encoder.keyCircleBuf, keyInfo);
 				}
 			} else if (ec11CurrentState == EC11_DIRECTION_REVERSE_HALF) {
 				if (switchBCounter == 1) {
@@ -293,7 +293,7 @@ static void Ec11TickProcess() {
 						ec11Encoder.hasRotate = true;
 						keyInfo.keyState = EC11_KEY_PRESS_RIGHT_ROTATE;
 					}
-					WriteBuf(&ec11Encoder.keyCircleBuf, &keyInfo);
+					WriteBuf(&ec11Encoder.keyCircleBuf, keyInfo);
 				}
 			}
 		}
@@ -329,7 +329,7 @@ void Ec11StateMachineProcess()
 	Ec11TickProcess();
 }
 
-void GetKeyState(KeyInfo *out, uint8_t *remain, uint8_t *ret)
+void GetKeyState(KeyInfo *out, uint16_t *remain, uint8_t *ret)
 {
 	ReadBuf(&ec11Encoder.keyCircleBuf, out, remain, ret);
 }

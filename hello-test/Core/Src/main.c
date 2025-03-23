@@ -26,14 +26,15 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
-#include "key.h"
 #include "ec11.h"
 #include "dht11.h"
 #include "timer.h"
 #include "st7735s.h"
 #include "image.h"
+#include "protocol.h"
+#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -83,7 +84,7 @@ void ProcessKey()
 	lastTick = currentTick;
 
 	KeyInfo keyInfo;
-	uint8_t remainCount = 0;
+	uint16_t remainCount = 0;
 	uint8_t ret = 0;
 	do {
 		GetKeyState(&keyInfo, &remainCount, &ret);
@@ -160,23 +161,23 @@ void ProcessLcd()
 //	const Rect rect2 = {{10, 10}, 20, 20};
 //	LcdDrawRect(&rect2, BLACK_RGB565);
 
-	TFT_ShowChar(0, 0, 'A', 0x7564, YELLOW, 16, true);
-	TFT_ShowChar(0, 16, 'B', BLUE, YELLOW, 16, true);
-	TFT_ShowChar(0, 32, 'C', BLUE, YELLOW, 16, true);
-	TFT_ShowChar(0, 48, 'D', BLUE, YELLOW, 16, true);
-	TFT_ShowChar(0, 64, 'E', BLUE, YELLOW, 16, true);
-	TFT_ShowChar(0, 80, 'F', BLUE, YELLOW, 16, true);
-	TFT_ShowChar(0, 96, 'G', BLUE, YELLOW, 16, true);
-	TFT_ShowChar(0, 112, 'H', BLUE, YELLOW, 16, true);
-	TFT_ShowChar(0, 128, 'I', BLUE, YELLOW, 16, true);
-	TFT_ShowChar(0, 144, 'J', BLUE, YELLOW, 16, true);
-
-	LCD_ShowCharStr(40, 32, 80, "HELLO", YELLOW, BLACK, 16);
-	LCD_ShowCharNumber(48,64,128,20,YELLOW,BLACK,12);
-	LCD_ShowCharNumber(60,64,128,22,YELLOW,BLACK,12);
-
-	TFT_ShowChar(64, 84, 'Y', BLUE, OLIVE, 32, true);
-
+//	TFT_ShowChar(0, 0, 'A', 0x7564, YELLOW, 16, true);
+//	TFT_ShowChar(0, 16, 'B', BLUE, YELLOW, 16, true);
+//	TFT_ShowChar(0, 32, 'C', BLUE, YELLOW, 16, true);
+//	TFT_ShowChar(0, 48, 'D', BLUE, YELLOW, 16, true);
+//	TFT_ShowChar(0, 64, 'E', BLUE, YELLOW, 16, true);
+//	TFT_ShowChar(0, 80, 'F', BLUE, YELLOW, 16, true);
+//	TFT_ShowChar(0, 96, 'G', BLUE, YELLOW, 16, true);
+//	TFT_ShowChar(0, 112, 'H', BLUE, YELLOW, 16, true);
+//	TFT_ShowChar(0, 128, 'I', BLUE, YELLOW, 16, true);
+//	TFT_ShowChar(0, 144, 'J', BLUE, YELLOW, 16, true);
+//
+//	LCD_ShowCharStr(40, 32, 80, "HELLO", YELLOW, BLACK, 16);
+//	LCD_ShowCharNumber(48,64,128,20,YELLOW,BLACK,12);
+//	LCD_ShowCharNumber(60,64,128,22,YELLOW,BLACK,12);
+//
+//	TFT_ShowChar(64, 84, 'Y', BLUE, OLIVE, 32, true);
+//
 	// 图像rgb565数组使用utils目录下"image2rgb565scale.py 图片文件 宽 高"命令生成，
 	// 可以不指定宽或者高，脚本自动按照图片原始的宽高比计算新的值
 	static uint16_t xStart = 0;
@@ -197,6 +198,27 @@ void ProcessLcd()
 
 
 //	LcdDrawRgb565(IMG_DATA, 60, 0, IMG_WIDTH, IMG_HEIGHT);
+}
+
+void ProcessUart()
+{
+//	static uint32_t lastTick = 0;
+//	uint32_t currentTick = HAL_GetTick();
+//	if (currentTick - lastTick < 1) {
+//		return;
+//	}
+//	lastTick = currentTick;
+
+	MessageHeader *messageHeader = NULL;
+	uint16_t remainCount = 0;
+	uint8_t ret = 0;
+	do {
+		ReadBuf(&GetProtocolDecoder()->messageBuffer, &messageHeader, &remainCount, &ret);
+		if (ret != 0) {
+			DumpMessage(messageHeader);
+			free(messageHeader);
+		}
+	} while (remainCount != 0);
 }
 /* USER CODE END 0 */
 
@@ -233,13 +255,15 @@ int main(void)
   MX_TIM4_Init();
   MX_USART2_UART_Init();
   MX_SPI2_Init();
+  MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim4);
 	Ec11EncoderInit();
 	TIM3_Init();
-	LcdInit();
+//	LcdInit();
 	//	LcdClear(0x7564);
 	//		ProcessLcd();
+	ProtocolInit(GetProtocolDecoder());
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -248,7 +272,8 @@ int main(void)
   {
 	  ProcessKey();
 	ProcessDth11();
-	ProcessLcd();
+//	ProcessLcd();
+	ProcessUart();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -8,7 +8,7 @@
 #ifndef INC_DHT11_H_
 #define INC_DHT11_H_
 
-#include <stdint.h>
+#include <inttypes.h>
 #include <stdbool.h>
 
 typedef struct

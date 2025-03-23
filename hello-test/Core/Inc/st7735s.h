@@ -8,7 +8,7 @@
 #ifndef INC_ST7735S_H_
 #define INC_ST7735S_H_
 
-#include <stdint.h>
+#include <inttypes.h>
 #include <stdbool.h>
 
 #define LCD_WIDTH 160

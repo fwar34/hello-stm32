@@ -9,7 +9,7 @@
 #define INC_TIMER_H_
 
 #include "stm32f1xx_hal.h"
-#include <stdint.h>
+#include <inttypes.h>
 
 void TIM3_Init(void);
 void StartTimer3();

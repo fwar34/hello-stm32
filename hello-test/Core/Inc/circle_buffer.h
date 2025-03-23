@@ -1,16 +1,17 @@
 #ifndef __CIRCLE_BUFFER_H_
 #define __CIRCLE_BUFFER_H_
 
-#include "stdint.h"
 #include "spinlock.h"
+#include <inttypes.h>
+#include <string.h>
 
 #define DefineCircleBuffer(structType, itemType, bufSize)\
-typedef struct {\
+typedef struct _##structType {\
 	itemType dataBuf[bufSize];\
-	uint8_t readIndex;\
-	uint8_t writeIndex;\
-	uint8_t count;\
-	uint8_t capacity;\
+	uint16_t readIndex;\
+	uint16_t writeIndex;\
+	uint16_t count;\
+	uint16_t capacity;\
 	volatile SpinLock bufLock;\
 } structType;
 
@@ -37,13 +38,14 @@ typedef struct {\
 	release_spinlock(&(buffer)->bufLock);\
 }
 
+// buffer满了继续添加，同时偏移readIndex
 #define WriteBuf(buffer, data)\
 {\
 	accquire_spinlock(&(buffer)->bufLock, 0);\
 	if ((buffer)->count >= (buffer)->capacity && (buffer)->writeIndex == (buffer)->readIndex) {\
 		(buffer)->readIndex = ((buffer)->readIndex + 1) % (buffer)->capacity;\
 	}\
-	(buffer)->dataBuf[(buffer)->writeIndex] = *(data);\
+	(buffer)->dataBuf[(buffer)->writeIndex] = (data);\
 	(buffer)->writeIndex = ((buffer)->writeIndex + 1) % (buffer)->capacity;\
 	(buffer)->count++;\
 	if ((buffer)->count > (buffer)->capacity) {\
@@ -52,13 +54,26 @@ typedef struct {\
 	release_spinlock(&(buffer)->bufLock);\
 }
 
-#define BufCount(buffer)\
+// buffer满了就不操作
+#define WriteBufNotFull(buffer, data)\
 {\
-	uint8_t count = 0;\
 	accquire_spinlock(&(buffer)->bufLock, 0);\
-	count = (buffer)->count;\
+	if ((buffer)->count < (buffer)->capacity) {\
+		(buffer)->dataBuf[(buffer)->writeIndex] = (data);\
+		(buffer)->writeIndex = ((buffer)->writeIndex + 1) % (buffer)->capacity;\
+		(buffer)->count++;\
+		if ((buffer)->count > (buffer)->capacity) {\
+			(buffer)->count = (buffer)->capacity;\
+		}\
+	}\
+	release_spinlock(&(buffer)->bufLock);\
+}
+
+#define BufCount(buffer, outCount)\
+{\
+	accquire_spinlock(&(buffer)->bufLock, 0);\
+	*(outCount) = (buffer)->count;\
 	release_spinlock(&cbuf->bufLock);\
-	count;\
 }
 
 #endif

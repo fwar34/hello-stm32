@@ -1,8 +1,8 @@
 #ifndef __EC11_H_
 #define __EC11_H_
 
-#include "stdint.h"
-#include "stdbool.h"
+#include <inttypes.h>
+#include <stdbool.h>
 
 #define KEY0 0
 #define EC11_KEY 1
@@ -30,6 +30,6 @@ void Ec11EncoderInit();
 const char *GetKeyName(uint8_t keyIndex);
 const char *GetKeyEventName(uint8_t keyEvent);
 void Ec11StateMachineProcess();
-void GetKeyState(KeyInfo *out, uint8_t *remain, uint8_t *ret);
+void GetKeyState(KeyInfo *out, uint16_t *remain, uint8_t *ret);
 
 #endif

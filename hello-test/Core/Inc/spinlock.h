@@ -1,8 +1,8 @@
 #ifndef __LOCK_H_
 #define __LOCK_H_
 
-#include "stdint.h"
-#include "stdbool.h"
+#include <inttypes.h>
+#include <stdbool.h>
 
 #define SpinLock int32_t
 
