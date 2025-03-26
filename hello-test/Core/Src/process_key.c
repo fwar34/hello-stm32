@@ -58,6 +58,7 @@ void ProcessKey()
 					ImageMoveRight(2);
 					break;
 				default:
+					break;
 				}
 			}
 		}

@@ -111,9 +111,11 @@ void ReadData()
 	StartTimer3();
 	HAL_GPIO_WritePin(ec11_A_GPIO_Port, ec11_A_Pin, GPIO_PIN_SET);
 	uint32_t lastTick = Timer3Count();
+	uint32_t tmr3Count = 0;
 	Dht11Input();
 	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_SET) {
-		if (Timer3Count() - lastTick > 50) {
+		tmr3Count = Timer3Count();
+		if (tmr3Count - lastTick > 50) {
 			__enable_irq();
 			StopTimer3();
 			dht11Context.currentState = DHT_STATE_START_MEASURE;
@@ -123,7 +125,8 @@ void ReadData()
 
 	lastTick = Timer3Count();
 	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_RESET) {
-		if (Timer3Count() - lastTick > 100) {
+		tmr3Count = Timer3Count();
+		if (tmr3Count - lastTick > 100) {
 			__enable_irq();
 			StopTimer3();
 			dht11Context.currentState = DHT_STATE_START_MEASURE;
@@ -133,7 +136,8 @@ void ReadData()
 
 	lastTick = Timer3Count();
 	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_SET) {
-		if (Timer3Count() - lastTick > 100) {
+		tmr3Count = Timer3Count();
+		if (tmr3Count - lastTick > 100) {
 			__enable_irq();
 			StopTimer3();
 			dht11Context.currentState = DHT_STATE_START_MEASURE;
@@ -143,7 +147,8 @@ void ReadData()
 
 	lastTick = Timer3Count();
 	while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_RESET) {
-		if (Timer3Count() - lastTick > 60) {
+		tmr3Count = Timer3Count();
+		if (tmr3Count - lastTick > 60) {
 			__enable_irq();
 			StopTimer3();
 			dht11Context.currentState = DHT_STATE_START_MEASURE;
@@ -156,7 +161,8 @@ void ReadData()
 	for (uint8_t i = 0; i < DHT11_DATA_BYTE_NUM_5; ++i) {
 		for (uint8_t j = 0; j < DHT11_DATA_BIT_NUM_OF_BYTE_8; ++j) {
 			while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_SET) {
-				if (Timer3Count() - lastTick > 100) {
+				tmr3Count = Timer3Count();
+				if (tmr3Count - lastTick > 100) {
 					__enable_irq();
 					StopTimer3();
 					dht11Context.currentState = DHT_STATE_START_MEASURE;
@@ -172,7 +178,8 @@ void ReadData()
 
 			lastTick = Timer3Count();
 			while (HAL_GPIO_ReadPin(dht11_GPIO_Port, dht11_Pin) == GPIO_PIN_RESET) {
-				if (Timer3Count() - lastTick > 60) {
+				tmr3Count = Timer3Count();
+				if (tmr3Count - lastTick > 60) {
 					__enable_irq();
 					StopTimer3();
 					dht11Context.currentState = DHT_STATE_START_MEASURE;

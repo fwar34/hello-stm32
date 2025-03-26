@@ -10,17 +10,11 @@
 
 #define SPI_DMA_BUFFER_SIZE 1024
 
-#define CLR_LCD_CS HAL_GPIO_WritePin(spi_cs_GPIO_Port, spi_cs_Pin, GPIO_PIN_RESET)
-#define SET_LCD_CS HAL_GPIO_WritePin(spi_cs_GPIO_Port, spi_cs_Pin, GPIO_PIN_SET)
+#define LCD_BEGIN() HAL_GPIO_WritePin(spi_cs_GPIO_Port, spi_cs_Pin, GPIO_PIN_RESET)
+#define LCD_END() HAL_GPIO_WritePin(spi_cs_GPIO_Port, spi_cs_Pin, GPIO_PIN_SET)
 
-#define CLR_LCD_DC HAL_GPIO_WritePin(spi_dc_GPIO_Port, spi_dc_Pin, GPIO_PIN_RESET)
-#define SET_LCD_DC HAL_GPIO_WritePin(spi_dc_GPIO_Port, spi_dc_Pin, GPIO_PIN_SET)
-
-//#define CLR_LCD_MOSI HAL_GPIO_WritePin(, spi_mosi_Pin, GPIO_PIN_RESET)
-//#define SET_LCD_MOSI HAL_GPIO_WritePin(spi_mosi_GPIO_Port, spi_mosi_Pin, GPIO_PIN_SET)
-//
-//#define CLR_LCD_SCL HAL_GPIO_WritePin(spi_scl_GPIO_Port, spi_scl_Pin, GPIO_PIN_RESET)
-//#define SET_LCD_SCL HAL_GPIO_WritePin(spi_scl_GPIO_Port, spi_scl_Pin, GPIO_PIN_SET)
+#define LCD_CMD() HAL_GPIO_WritePin(spi_dc_GPIO_Port, spi_dc_Pin, GPIO_PIN_RESET)
+#define LCD_DATA() HAL_GPIO_WritePin(spi_dc_GPIO_Port, spi_dc_Pin, GPIO_PIN_SET)
 
 #define CLR_LCD_RES HAL_GPIO_WritePin(spi_res_GPIO_Port, spi_res_Pin, GPIO_PIN_RESET)
 #define SET_LCD_RES HAL_GPIO_WritePin(spi_res_GPIO_Port, spi_res_Pin, GPIO_PIN_SET)
@@ -32,7 +26,7 @@ static uint8_t spiTxComplete = 1;
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 {
 	if (hspi == &hspi2) {
-		SET_LCD_CS;
+		LCD_END();
 		spiTxComplete = 1;
 	}
 }
@@ -40,7 +34,7 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi)
 void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *hspi)
 {
 	if (hspi == &hspi2) {
-		SET_LCD_CS;
+		LCD_END();
 		spiTxComplete = 1;
 		static char *message = "spi2 dma error";
 		send_data_safely(message, strlen(message));
@@ -51,12 +45,12 @@ void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *hspi)
 void LcdWriteCmd(uint8_t data)
 {
 //	SPI_LOCK();
-//	CLR_LCD_CS;
-	CLR_LCD_DC;
+//	LCD_BEGIN();
+	LCD_CMD();
 
 	HAL_SPI_Transmit(&hspi2, &data, sizeof(uint8_t), HAL_MAX_DELAY);
 
-//	SET_LCD_CS;
+//	LCD_END();
 //	SPI_UNLOCK();
 }
 
@@ -64,26 +58,26 @@ void LcdWriteCmd(uint8_t data)
 void LcdWriteData(uint8_t data)
 {
 //	SPI_LOCK();
-//	CLR_LCD_CS;
-	SET_LCD_DC;
+//	LCD_BEGIN();
+	LCD_DATA();
 
 //	HAL_SPI_Transmit_DMA(&hspi2, &data, 1);
 	HAL_SPI_Transmit(&hspi2, &data, sizeof(uint8_t), HAL_MAX_DELAY);
 
-//	SET_LCD_CS;
+//	LCD_END();
 //	SPI_UNLOCK();
 }
 
 void LcdWriteDataSPI(uint8_t *data, uint16_t dataSize)
 {
 //	SPI_LOCK();
-//	CLR_LCD_CS;
-	SET_LCD_DC;
+//	LCD_BEGIN();
+	LCD_DATA();
 
 //	HAL_SPI_Transmit_DMA(&hspi2, &data, 1);
 	HAL_SPI_Transmit(&hspi2, data, dataSize, HAL_MAX_DELAY);
 
-//	SET_LCD_CS;
+//	LCD_END();
 //	SPI_UNLOCK();
 }
 
@@ -95,26 +89,26 @@ void LcdWriteDataU16(uint16_t data)
 	uint8_t tmp[2];
 	tmp[0] = data >> 8;
 	tmp[1] = data & 0xFF;
-//	CLR_LCD_CS;
-	SET_LCD_DC;
+//	LCD_BEGIN();
+	LCD_DATA();
 //	HAL_SPI_Transmit_DMA(&hspi2, tmp, 2);
 	HAL_SPI_Transmit(&hspi2, tmp, sizeof(tmp), HAL_MAX_DELAY);
-//	SET_LCD_CS;
+//	LCD_END();
 //	SPI_UNLOCK();
 }
 
 void LcdWriteDataArray(const uint8_t *array, uint16_t arrayLen)
 {
 //	SPI_LOCK();
-//	CLR_LCD_CS;
-	SET_LCD_DC;
+//	LCD_BEGIN();
+	LCD_DATA();
 //	if (HAL_SPI_Transmit_DMA(&hspi2, array, arrayLen) != HAL_OK) {
 //		static char *message = "LcdWriteDataArray failed!";
 //		send_data_safely(message, strlen(message));
 //	}
 
 	HAL_SPI_Transmit(&hspi2, array, arrayLen, HAL_MAX_DELAY);
-//	SET_LCD_CS;
+//	LCD_END();
 }
 
 // res低电平>5us,这里使用1ms，最长复位时间120ms
@@ -129,7 +123,7 @@ void LcdReset()
 
 void LcdSetParam()
 {
-	CLR_LCD_CS;
+	LCD_BEGIN();
 	LcdWriteCmd(0x11); // 退出睡眠
 	HAL_Delay(120);
 
@@ -226,7 +220,7 @@ void LcdSetParam()
 //	LcdWriteData(0xF0);
 
 	LcdWriteCmd(0x29);
-	SET_LCD_CS;
+	LCD_END();
 }
 
 
@@ -277,10 +271,10 @@ void LcdDrawBlock(uint8_t xStart, uint8_t yStart, uint8_t width, uint8_t height,
 		pxColor[i] = color;
 	}
 
-	CLR_LCD_CS;
+	LCD_BEGIN();
 	Lcd_SetRegion(xStart, yStart, xEnd, yEnd);
 	LcdWriteDataSPI((uint8_t*)pxColor, width * height * 2);
-	SET_LCD_CS;
+	LCD_END();
 }
 
 void LcdClear(uint16_t color)
@@ -289,11 +283,11 @@ void LcdClear(uint16_t color)
 	for (int i = 0; i < LCD_WIDTH; ++i) {
 		data[i] = color;
 	}
-	CLR_LCD_CS;
+	LCD_BEGIN();
     for (int i = 0; i < LCD_HEIGHT; i++) {
         LcdWriteDataSPI((uint8_t*)data, LCD_WIDTH * 2);
     }
-    SET_LCD_CS;
+    LCD_END();
 }
 
 void LcdDrawPoint(uint16_t x, uint16_t y, uint16_t color)
@@ -318,13 +312,13 @@ void LcdDrawLine(uint16_t startX, uint16_t startY, uint16_t length, uint16_t col
 
 void LcdDrawRect(const Rect *rect, uint16_t color)
 {
-	CLR_LCD_CS;
+	LCD_BEGIN();
 	LcdDrawLine(rect->leftUp.x, rect->leftUp.y, rect->width, color, LINE_DIR_HORIZONTAL);
 	LcdDrawLine(rect->leftUp.x, rect->leftUp.y + rect->height - 1, rect->width, color, LINE_DIR_HORIZONTAL);
 
 	LcdDrawLine(rect->leftUp.x, rect->leftUp.y, rect->height, color, LINE_DIR_VERTICAL);
 	LcdDrawLine(rect->leftUp.x + rect->width - 1, rect->leftUp.y, rect->height, color, LINE_DIR_VERTICAL);
-	SET_LCD_CS;
+	LCD_END();
 }
 
 void LcdDrawCircle(const Point *center, uint16_t radius, uint16_t color)
@@ -344,7 +338,7 @@ void TFT_ShowChar(uint16_t x, uint16_t y, char ch, uint16_t back_color,
 		return;
 
 	if (setLcdCS) {
-		CLR_LCD_CS;
+		LCD_BEGIN();
 	}
 	Lcd_SetRegion(x, y, x + font_size / 2 - 1, y + font_size - 1);
 
@@ -360,7 +354,7 @@ void TFT_ShowChar(uint16_t x, uint16_t y, char ch, uint16_t back_color,
 //				temp = asc2_3216[index][i];
 			} else {
 				if (setLcdCS) {
-					SET_LCD_CS;
+					LCD_END();
 				}
 				return;
 			}
@@ -411,12 +405,12 @@ void TFT_ShowChar(uint16_t x, uint16_t y, char ch, uint16_t back_color,
 //		}
 	} else {
 		if (setLcdCS) {
-			SET_LCD_CS;
+			LCD_END();
 		}
 		return;
 	}
 	if (setLcdCS) {
-		SET_LCD_CS;
+		LCD_END();
 	}
 }
 
@@ -426,7 +420,7 @@ void LCD_ShowCharStr(uint16_t x, uint16_t y, uint32_t max_width, char *str,
 
 	max_width += x;
 
-	CLR_LCD_CS;
+	LCD_BEGIN();
 	while ((*str <= '~') && (*str >= ' ')) {
 		if (x >= max_width) {
 			break;
@@ -436,7 +430,7 @@ void LCD_ShowCharStr(uint16_t x, uint16_t y, uint32_t max_width, char *str,
 		x += font_size / 2;
 		str++;
 	}
-	SET_LCD_CS;
+	LCD_END();
 }
 
 //Display number (byte type) in (x, y) with back_color, front_color and front_size under max_width. font.h is essential.
@@ -469,34 +463,34 @@ void LcdShowBmp(const uint8_t *pbmp, uint8_t x0, uint8_t y0, uint8_t x_Len,
 	uint16_t xy = (x_Len * y_Len) << 1;
 	uint16_t i = 0;
 
-	CLR_LCD_CS;
+	LCD_BEGIN();
 	Lcd_SetRegion(x0, y0, x1, y1);
 	LcdWriteCmd(0x2C);
 
 	for (i = 0; (i << 1) < xy; i++)
 		LcdWriteDataU16((pbmp[i << 1] << 8) + pbmp[(i << 1) + 1]);
-	SET_LCD_CS;
+	LCD_END();
 }
 
 void LcdDrawRgb565(const uint16_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height)
 {
 	uint16_t xEnd = xStart + width - 1;
 	uint16_t yEnd = yStart + height - 1;
-	CLR_LCD_CS;
+	LCD_BEGIN();
 	Lcd_SetRegion(xStart, yStart, xEnd, yEnd);
 	for (uint16_t i = 0; i < width * height; i++) {
 		LcdWriteDataU16(rgb565[i]);
 	}
-	SET_LCD_CS;
+	LCD_END();
 }
 
 void LcdDrawData(const uint8_t *rgb565, uint16_t xStart, uint16_t yStart, uint16_t width, uint16_t height)
 {
 	uint16_t xEnd = xStart + width - 1;
 	uint16_t yEnd = yStart + height - 1;
-	CLR_LCD_CS;
+	LCD_BEGIN();
 	Lcd_SetRegion(xStart, yStart, xEnd, yEnd);
 
 	LcdWriteDataArray(rgb565, width * height * 2);
-	SET_LCD_CS;
+	LCD_END();
 }
