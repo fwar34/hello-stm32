@@ -1,0 +1,5 @@
+../Core/Src/receive_buffer.c:7:16:GetReceiveBuffer	4	static
+../Core/Src/receive_buffer.c:12:6:Init	16	static
+../Core/Src/receive_buffer.c:18:6:IsEmpty	16	static
+../Core/Src/receive_buffer.c:23:6:ConsumeData	16	static
+../Core/Src/receive_buffer.c:29:6:Clear	16	static

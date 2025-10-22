@@ -1,0 +1,5 @@
+../Core/Src/protocol_statemachine.c:22:6:StateMachineReset	1
+../Core/Src/protocol_statemachine.c:27:13:ProcessHeader	2
+../Core/Src/protocol_statemachine.c:47:13:ProcessBody	8
+../Core/Src/protocol_statemachine.c:90:13:ProcessFilter	20
+../Core/Src/protocol_statemachine.c:150:6:ProcessData	4

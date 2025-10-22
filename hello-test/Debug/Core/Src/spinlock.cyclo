@@ -1,0 +1,4 @@
+../Core/Src/spinlock.c:10:12:cas	1
+../Core/Src/spinlock.c:44:6:try_accquire_lock	1
+../Core/Src/spinlock.c:48:6:accquire_spinlock	4
+../Core/Src/spinlock.c:59:6:release_spinlock	1

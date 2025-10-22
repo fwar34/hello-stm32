@@ -1,0 +1,9 @@
+>>> cc
+
+
+
+>>> ld
+
+Memory region         Used Size  Region Size  %age Used
+             RAM:        9720 B        20 KB     47.46%
+           FLASH:       62564 B        64 KB     95.47%

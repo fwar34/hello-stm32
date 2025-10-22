@@ -1,0 +1,15 @@
+../Core/Src/ec11.c:76:13:GetKeyName	24	static
+../Core/Src/ec11.c:90:13:GetKeyEventName	24	static
+../Core/Src/ec11.c:104:6:Ec11ResetStateMachine	4	static
+../Core/Src/ec11.c:115:6:Ec11EncoderInit	8	static
+../Core/Src/ec11.c:121:6:ProcessClickPress	16	static
+../Core/Src/ec11.c:130:6:ProcessClickPressDebouncing	24	static
+../Core/Src/ec11.c:148:6:ProcessClickReleaseDebouncing	8	static
+../Core/Src/ec11.c:162:6:ProcessClickRelease	24	static
+../Core/Src/ec11.c:185:6:ProcessDoubleClickPress	32	static
+../Core/Src/ec11.c:208:6:ProcessDoubleClickDebouncing	16	static
+../Core/Src/ec11.c:221:6:ProcessDoubleClickReleaseDebouncing	16	static
+../Core/Src/ec11.c:238:6:ProcessDoubleClickRelease	16	static
+../Core/Src/ec11.c:254:13:Ec11TickProcess	24	static
+../Core/Src/ec11.c:320:6:Ec11StateMachineProcess	16	static
+../Core/Src/ec11.c:332:6:GetKeyState	32	static

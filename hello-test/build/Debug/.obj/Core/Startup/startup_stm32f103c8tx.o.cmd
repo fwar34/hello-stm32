@@ -1,0 +1,1 @@
+"C:\Users\fwar3\.eide\tools\gcc_arm\bin\arm-none-eabi-gcc.exe" -c -x assembler-with-cpp -mthumb -ICore/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IDrivers/CMSIS/Include -mcpu=cortex-m3 -g -DDEBUG -o ./build/Debug/.obj/Core/Startup/startup_stm32f103c8tx.o -MMD ./Core/Startup/startup_stm32f103c8tx.s

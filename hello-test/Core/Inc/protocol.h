@@ -28,7 +28,7 @@ typedef struct _MessageHeader
 	uint32_t dstApp;
 	uint16_t srcPort;
 	uint16_t dstPort;
-	uint8_t data[0];
+	// uint8_t data[0];
 } MessageHeader;
 #pragma pack(pop)
 

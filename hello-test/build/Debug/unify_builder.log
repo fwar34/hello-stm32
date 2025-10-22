@@ -1,0 +1,625 @@
+[2025-03-28 11:33:29]	[info] incremental build: 40 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\usart.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\w25q64.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Startup\startup_stm32f103c8tx.s': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c': object (.o) file not exist
+
+[2025-03-28 11:33:33]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+c:/users/fwar3/.eide/tools/gcc_arm/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/hello-test.elf section `.rodata' will not fit in region `FLASH'
+c:/users/fwar3/.eide/tools/gcc_arm/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/ld.exe: region `FLASH' overflowed by 5084 bytes
+Memory region         Used Size  Region Size  %age Used
+             RAM:       13712 B        20 KB     66.95%
+           FLASH:       70620 B        64 KB    107.76%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2025-03-28 11:46:16]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+c:/users/fwar3/.eide/tools/gcc_arm/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/ld.exe: ./build/Debug/hello-test.elf section `.rodata' will not fit in region `FLASH'
+c:/users/fwar3/.eide/tools/gcc_arm/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/ld.exe: region `FLASH' overflowed by 5084 bytes
+Memory region         Used Size  Region Size  %age Used
+             RAM:       17808 B        20 KB     86.95%
+           FLASH:       70620 B        64 KB    107.76%
+collect2.exe: error: ld returned 1 exit status
+
+
+[2025-03-28 11:46:57]	[info] incremental build: 39 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\usart.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\w25q64.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c': compiler options has been changed.
+
+[2025-03-28 11:47:07]	[done]
+	build successfully !
+
+[2025-03-28 11:48:55]	[info] incremental build: 39 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\usart.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\w25q64.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c': compiler options has been changed.
+
+[2025-03-28 11:49:04]	[done]
+	build successfully !
+
+[2025-03-28 11:50:35]	[info] incremental build: 39 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\usart.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\w25q64.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c': compiler options has been changed.
+
+[2025-03-28 11:51:23]	[done]
+	build successfully !
+
+[2025-03-28 12:05:02]	[done]
+	build successfully !
+
+[2025-03-28 12:05:56]	[info] incremental build: 1 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': source file has been changed.
+
+[2025-03-28 12:05:58]	[done]
+	build successfully !
+
+[2025-03-28 12:07:10]	[info] incremental build: 39 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\usart.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\w25q64.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c': compiler options has been changed.
+
+[2025-03-28 12:07:18]	[done]
+	build successfully !
+
+[2025-03-28 12:09:10]	[info] incremental build: 39 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\usart.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\w25q64.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c': compiler options has been changed.
+
+[2025-03-28 12:09:15]	[done]
+	build successfully !
+
+[2025-03-28 12:09:42]	[info] incremental build: 40 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\usart.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\w25q64.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Startup\startup_stm32f103c8tx.s': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c': object (.o) file not exist
+
+[2025-03-28 12:09:47]	[done]
+	build successfully !
+
+[2025-03-28 12:09:59]	[info] incremental build: 39 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\usart.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\w25q64.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c': compiler options has been changed.
+
+[2025-03-28 12:10:04]	[done]
+	build successfully !
+
+[2025-03-28 12:10:24]	[info] incremental build: 39 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\usart.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\w25q64.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c': compiler options has been changed.
+
+[2025-03-28 12:10:30]	[done]
+	build successfully !
+
+[2025-03-28 12:11:31]	[done]
+	build successfully !
+
+[2025-03-28 12:26:13]	[info] incremental build: 40 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\usart.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\w25q64.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Startup\startup_stm32f103c8tx.s': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c': compiler options has been changed.
+
+[2025-03-28 12:26:16]	compilation failed at : "e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCC\bin\armcc.exe" -c --apcs=interwork -ICore/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IDrivers/CMSIS/Include -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB --cpu Cortex-M3 --li --c99 -O0 --split_sections --diag_suppress=1 --diag_suppress=1295 -g -o .\build\Debug\.obj\Core\Src\sysmem.o --no_depend_system_headers --depend .\build\Debug\.obj\Core\Src\sysmem.d .\Core\Src\sysmem.c
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+".\Core\Src\spinlock.c", line 27: Error:  #130: expected a "{"
+      __asm__ __volatile__(
+              ^
+".\Core\Src\spinlock.c", line 36: Error:  #18: expected a ")"
+          : "=&r"(temp)                  // 输出操作数，表示返回�?
+          ^
+".\Core\Src\spinlock.c", line 39: Warning:  #12-D: parsing restarts here after previous syntax error
+      );
+      ^
+".\Core\Src\spinlock.c", line 27: Warning:  #174-D: expression has no effect
+      __asm__ __volatile__(
+                          ^
+.\Core\Src\spinlock.c: 2 warnings, 2 errors
+".\Core\Src\syscalls.c", line 24: Error:  #5: cannot open source input file "sys/stat.h": No such file or directory
+  #include <sys/stat.h>
+                       ^
+.\Core\Src\syscalls.c: 0 warnings, 1 error
+".\Core\Src\sysmem.c", line 30: Error:  #20: identifier "NULL" is undefined
+  static uint8_t *__sbrk_heap_end = NULL;
+                                    ^
+".\Core\Src\sysmem.c", line 53: Error:  #20: identifier "ptrdiff_t" is undefined
+  void *_sbrk(ptrdiff_t incr)
+              ^
+.\Core\Src\sysmem.c: 0 warnings, 2 errors
+
+[2025-03-28 12:26:29]	[info] incremental build: 40 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\usart.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\w25q64.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Startup\startup_stm32f103c8tx.s': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_cortex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_exti.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_flash_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_gpio_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_pwr.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_rcc_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_tim_ex.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Drivers\STM32F1xx_HAL_Driver\Src\stm32f1xx_hal_uart.c': compiler options has been changed.
+
+[2025-03-28 12:26:31]	compilation failed at : "e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c", exit code: 1
+command: 
+  "C:\Keil_v5\ARM\ARMCLANG\bin\armclang.exe" --target=arm-arm-none-eabi -c -xc -std=c99 -ICore/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IDrivers/CMSIS/Include -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103xB -mcpu=cortex-m3 -mlittle-endian -O0 -fno-function-sections -funsigned-char -fno-rtti -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -g -o ./build/Debug/.obj/Core/Src/sysmem.o -MMD ./Core/Src/sysmem.c
+   at unify_builder.Program.compileByMulThread(Int32 thrNum, CmdInfo[] cmds_, List`1 errLogs)
+   at unify_builder.Program.Main(String[] args_)
+---
+./Core/Src/syscalls.c:24:10: fatal error: 'sys/stat.h' file not found
+#include <sys/stat.h>
+         ^~~~~~~~~~~~
+1 error generated.
+./Core/Src/sysmem.c:30:35: error: use of undeclared identifier 'NULL'
+static uint8_t *__sbrk_heap_end = NULL;
+                                  ^
+./Core/Src/sysmem.c:53:13: error: unknown type name 'ptrdiff_t'
+void *_sbrk(ptrdiff_t incr)
+            ^
+./Core/Src/sysmem.c:63:7: error: use of undeclared identifier 'NULL'
+  if (NULL == __sbrk_heap_end)
+      ^
+3 errors generated.
+
+[2025-03-28 12:26:38]	[info] incremental build: 22 source files changed
+These source files will be recompiled
+---
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dht11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\dma.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\ec11.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\gpio.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\main.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\my_spi1.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_command.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_key.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\process_render.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\protocol_statemachine.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\receive_buffer.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spi.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\spinlock.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\st7735s.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_hal_msp.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\stm32f1xx_it.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\syscalls.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\sysmem.c': object (.o) file not exist
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\system_stm32f1xx.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\tim.c': compiler options has been changed.
+'e:\STM32CubeIDE_Workspace\hello-test\Core\Src\timer3.c': compiler options has been changed.
+
+[2025-03-28 12:26:40]	link failed !, exit code: 1
+   at unify_builder.Program.Main(String[] args_)
+---
+c:/users/fwar3/.eide/tools/gcc_arm/bin/../lib/gcc/arm-none-eabi/10.2.1/../../../../arm-none-eabi/bin/ld.exe: cannot open linker script file e:/STM32CubeIDE_Workspace/hello-test/<YOUR_LINKER_SCRIPT>.lds: Invalid argument
+collect2.exe: error: ld returned 1 exit status
+
+
+[2025-03-28 12:26:55]	[done]
+	build successfully !
+

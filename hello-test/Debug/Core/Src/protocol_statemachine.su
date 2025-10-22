@@ -1,0 +1,5 @@
+../Core/Src/protocol_statemachine.c:22:6:StateMachineReset	16	static
+../Core/Src/protocol_statemachine.c:27:13:ProcessHeader	24	static
+../Core/Src/protocol_statemachine.c:47:13:ProcessBody	32	static
+../Core/Src/protocol_statemachine.c:90:13:ProcessFilter	32	static
+../Core/Src/protocol_statemachine.c:150:6:ProcessData	24	static
